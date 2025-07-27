@@ -1,36 +1,30 @@
 {
-  "name": "hackabuy",
+  "name": "HackaBUY",
   "version": "1.0.0",
-  "description": "HackaBUY project for Hackatohon",
-  "license": "ISC",
-  "author": "Yağız Akın BAŞTOPÇU, Mustafa Beke ÖZCAN, Umut Yusuf KAN",
-  "type": "commonjs",
+  "description": "",
   "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "start": "webpack serve --open --mode development"
   },
-    "devDependencies": {
-    "@babel/eslint-parser": "^7.22.15",
-    "@eslint/eslintrc": "^2.1.2",
-    "@eslint/js": "^8.49.0",
-    "@typescript-eslint/eslint-plugin": "^6.7.2",
-    "@typescript-eslint/parser": "^6.7.2",
+  "author": "Yağız Akın BAŞTOPÇU, Umut Yusuf KAN, Mustafa Berke ÖZCAN",
+  "license": "",
+  "devDependencies": {
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "source-map-loader": "^4.0.1",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.100.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
+  },
+  "dependencies": {
     "blockly": "^12.0.0",
-    "conventional-changelog-conventionalcommits": "^5.0.0",
-    "eslint": "^8.49.0",
-    "eslint-config-google": "^0.14.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-jsdoc": "^46.8.2",
-    "gh-pages": "^6.1.1",
-    "globals": "^13.22.0",
-    "gulp": "^5.0.0",
-    "gulp-header": "^2.0.9",
-    "http-server": "^14.1.1",
-    "js-green-licenses": "^4.0.0",
-    "prettier": "^3.0.3",
-    "rimraf": "^3.0.2",
-    "showdown": "^2.1.0",
-    "typescript": "^5.5.4"
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "path": "^0.12.7",
+    "url": "^0.11.4"
   }
-
 }
