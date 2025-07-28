@@ -55,9 +55,9 @@ ws.addChangeListener((e) => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const downloadButton = document.getElementById('downloadDataButton');
-  const loadButton = document.getElementById('loadDataButton');
   const fileInput = document.getElementById('fileInput');
   const fileContentDisplay = document.getElementById('fileContentDisplay');
+  const clearButton = document.getElementById('clearButton');
   if (downloadButton) {
     downloadButton.addEventListener('click', () => {
         // 1. Veriyi Hazırlama (örnek olarak JSON)
@@ -89,11 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Veri indirme işlemi başlatıldı.');
     });
 } 
-  if (loadButton && fileInput && fileContentDisplay) {
-    loadButton.addEventListener('click', () => {
-      fileInput.click();
-    });
-
+  if (fileInput) {
     fileInput.addEventListener('change', (event) => {
       const selectedFile = event.target.files[0]; // Tek dosya seçimi için ilk dosyayı al
 
@@ -133,6 +129,19 @@ document.addEventListener('DOMContentLoaded', () => {
           fileContentDisplay.innerHTML = '<p>Henüz dosya seçilmedi.</p>';
       }
   });
-
   }
+  /*
+
+  if(clearButton){
+    downloadButton.addEventListener('click', () => {
+      Blockly.Events.disable();
+      Blockly.serialization.workspaces.load(JSON.parse(""),ws,false);
+      Blockly.Events.enable();
+    });
+  };
+
+*/
+
+
+
 });
