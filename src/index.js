@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log('Veri indirme işlemi başlatıldı.');
     });
-} 
+  } 
   if (fileInput) {
     fileInput.addEventListener('change', (event) => {
       const selectedFile = event.target.files[0]; // Tek dosya seçimi için ilk dosyayı al
@@ -130,18 +130,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   });
   }
-  /*
-
-  if(clearButton){
-    downloadButton.addEventListener('click', () => {
+  if (clearButton) {
+    clearButton.addEventListener('click', (event) => {
+      const jsonData = JSON.parse("{}");
       Blockly.Events.disable();
-      Blockly.serialization.workspaces.load(JSON.parse(""),ws,false);
+      Blockly.serialization.workspaces.load(jsonData, ws, false);
       Blockly.Events.enable();
-    });
-  };
-
-*/
-
-
-
+  });
+  }
 });
