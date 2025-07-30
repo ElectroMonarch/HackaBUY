@@ -20,7 +20,7 @@ const Order = {
 jsonGenerator.scrub_ = function (block, code, thisOnly) {
   const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
   if (nextBlock && !thisOnly) {
-    return code + ',\n' + jsonGenerator.blockToCode(nextBlock);
+    return code + '\n' + jsonGenerator.blockToCode(nextBlock);
   }
   return code;
 };
@@ -74,3 +74,37 @@ jsonGenerator.forBlock['object'] = function (block, generator) {
   const code = '{\n' + statementMembers + '\n}';
   return [code, Order.ATOMIC];
 };
+
+
+jsonGenerator.forBlock['text_output'] = function (block, generator) {
+  const text = String(block.getFieldValue('OUTPUT_TEXT'));
+  const code = `print ${text}`;
+  return code;
+};
+
+jsonGenerator.forBlock['number_output'] = function (block, generator) {
+  const value = generator.valueToCode(block, 'MEMBER_VALUE', Order.ATOMIC);
+  const code = `print number ${value}`;
+  return code;
+};
+
+jsonGenerator.forBlock['for_loop'] = function (block, generator) {
+  const count = generator.valueToCode(block, 'LOOP_ITERATION_COUNT', Order.ATOMIC);
+  const statementMembers = generator.statementToCode(block, 'MEMBERS');
+  const code = 'for i in range(' + count + '):\n' + statementMembers + '\n';
+  return code;
+};
+
+jsonGenerator.forBlock['variable'] = function (block) {
+  const code = String(block.getFieldValue('VAR_NAME'));
+  return [code, Order.ATOMIC];
+};
+
+jsonGenerator.forBlock['arithmetic'] = function (block, generator) {
+  const op = String(block.getFieldValue('DROPDOWN'));
+  const n1 = generator.valueToCode(block, 'NUM1', Order.ATOMIC);
+  const n2 = generator.valueToCode(block, 'NUM2', Order.ATOMIC);
+  const code = n1 + " " + op + " " + n2;
+  return [code, Order.ATOMIC];
+};
+

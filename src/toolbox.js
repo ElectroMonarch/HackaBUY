@@ -9,6 +9,32 @@ export const toolbox = {
   contents: [
     {
       kind: 'block',
+      type: 'math_number',
+    },
+    {
+      kind: 'block',
+      type: 'number_output',
+    },
+    {
+      kind: 'block',
+      type: 'text_output',
+    },
+    {
+      kind: 'block',
+      type: 'for_loop',
+    },
+    {
+      kind: 'block',
+      type: 'variable',
+    },
+    {
+      kind: 'block',
+      type: 'arithmetic'
+    },
+
+
+    {
+      kind: 'block',
       type: 'object',
     },
     {
@@ -17,15 +43,7 @@ export const toolbox = {
     },
     {
       kind: 'block',
-      type: 'math_number',
-    },
-    {
-      kind: 'block',
       type: 'text',
-    },
-    {
-      kind: 'block',
-      type: 'logic_boolean',
     },
     {
       kind: 'block',
