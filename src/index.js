@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
               Blockly.Events.disable();
               Blockly.serialization.workspaces.load(jsonData, ws, false);
               Blockly.Events.enable();
+              runCode();
 
           };
 
@@ -136,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
       Blockly.Events.disable();
       Blockly.serialization.workspaces.load(jsonData, ws, false);
       Blockly.Events.enable();
+      runCode();
   });
   }
 });
