@@ -19,16 +19,48 @@ const codeDiv = document.getElementById('generatedCode').firstChild;
 const blocklyDiv = document.getElementById('blocklyDiv');
 const ws = Blockly.inject(blocklyDiv, {toolbox});
 
-// This function resets the code div and shows the
-// generated code from the workspace.
-const runCode = () => {
+// Bu fonksiyon, Blockly'den kodu oluşturur ve HTML'e yazar
+const updateCodeDisplay = () => {
   const code = jsonGenerator.workspaceToCode(ws);
   codeDiv.innerText = code;
 };
 
-// Load the initial state from storage and run the code.
+// Bu fonksiyon, Blockly'den kodu alır ve PyScript'in çalıştırabileceği bir HTML öğesine yerleştirir.
+const runCode = () => {
+    const codeToRun = jsonGenerator.workspaceToCode(ws);
+    
+    const pyScriptTag = document.querySelector('py-script');
+    
+    // Çıktı alanını temizle
+    const outputDiv = document.getElementById('output');
+    outputDiv.innerHTML = 'Uygulama mesajları veya çıktıları burada görünecek.';
+    
+    // PyScript'e kodu ve çıktının yazılacağı yeri söyle
+    // print fonksiyonunu override ederek çıktıyı HTML'e yazmasını sağla
+    pyScriptTag.innerHTML = `
+        from js import document
+        from pyodide.ffi import to_js
+
+        def custom_print(*args, sep=' ', end='\\n', file=None):
+            output_el = document.getElementById('output')
+            output_el.innerHTML += sep.join(str(x) for x in args) + end
+            output_el.scrollTop = output_el.scrollHeight
+
+        __builtins__.print = custom_print
+
+        ${codeToRun}
+    `;
+
+    // PyScript'i yeniden başlatarak yeni kodu çalıştır
+    const newPyScriptTag = document.createElement('py-script');
+    newPyScriptTag.innerHTML = pyScriptTag.innerHTML;
+    pyScriptTag.parentNode.replaceChild(newPyScriptTag, pyScriptTag);
+};
+
+
+// Load the initial state from storage and update the code display.
 load(ws);
-runCode();
+updateCodeDisplay();
 
 // Every time the workspace changes state, save the changes to storage.
 ws.addChangeListener((e) => {
@@ -38,7 +70,7 @@ ws.addChangeListener((e) => {
   save(ws);
 });
 
-// Whenever the workspace changes meaningfully, run the code again.
+// Whenever the workspace changes meaningfully, update the code display.
 ws.addChangeListener((e) => {
   // Don't run the code when the workspace finishes loading; we're
   // already running it once when the application starts.
@@ -50,94 +82,71 @@ ws.addChangeListener((e) => {
   ) {
     return;
   }
-  runCode();
+  updateCodeDisplay();
 });
 
 document.addEventListener('DOMContentLoaded', () => {
   const downloadButton = document.getElementById('downloadDataButton');
   const fileInput = document.getElementById('fileInput');
-  const fileContentDisplay = document.getElementById('fileContentDisplay');
+  const fileStatus = document.getElementById('fileStatus');
   const clearButton = document.getElementById('clearButton');
+
   if (downloadButton) {
     downloadButton.addEventListener('click', () => {
-        // 1. Veriyi Hazırlama (örnek olarak JSON)
-        const userData = Blockly.serialization.workspaces.save(ws);
-
-        // Veriyi JSON string'ine dönüştür
-        const jsonString = JSON.stringify(userData); // null ve 2 ile daha okunabilir format
-
-        // 2. Blob Oluşturma
-        // 'application/json' MIME tipi ile bir Blob oluşturuyoruz
-        const blob = new Blob([jsonString], { type: 'application/json' });
-
-        // 3. URL Oluşturma
-        const url = URL.createObjectURL(blob);
-
-        // 4. İndirme Bağlantısı Oluşturma
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'user_data.json'; // Kullanıcının indireceği dosyanın adı
-
-        // 5. Programatik Tıklama ve Temizleme
-        // Bağlantıyı doğrudan tıklayarak indirme işlemini başlat
-        a.click();
-
-        // Oluşturulan geçici URL'yi ve dolayısıyla Blob'u bellekten serbest bırak
-        // Bu, kaynak sızıntılarını önlemek için önemlidir
-        URL.revokeObjectURL(url);
-
-        console.log('Veri indirme işlemi başlatıldı.');
+      const userData = Blockly.serialization.workspaces.save(ws);
+      const jsonString = JSON.stringify(userData, null, 2);
+      const blob = new Blob([jsonString], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'user_data.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      console.log('Veri indirme işlemi başlatıldı.');
     });
-  } 
+  }
+
   if (fileInput) {
     fileInput.addEventListener('change', (event) => {
-      const selectedFile = event.target.files[0]; // Tek dosya seçimi için ilk dosyayı al
-
+      const selectedFile = event.target.files[0];
       if (selectedFile) {
-          console.log('Seçilen Dosya Adı:', selectedFile.name);
-          console.log('Seçilen Dosya Tipi:', selectedFile.type);
-          console.log('Seçilen Dosya Boyutu:', selectedFile.size, 'bytes');
-
-          const reader = new FileReader();
-
-          reader.onload = (e) => {
-              const fileContent = e.target.result;
-              let displayContent = '';
-              const jsonData = JSON.parse(fileContent);
-              Blockly.Events.disable();
-              Blockly.serialization.workspaces.load(jsonData, ws, false);
-              Blockly.Events.enable();
-              runCode();
-
-          };
-
-          reader.onerror = (error) => {
-              console.error('Dosya okuma hatası:', error);
-              fileContentDisplay.innerHTML = `<p style="color: red;">Dosya okunurken bir hata oluştu: ${error.message}</p>`;
-          };
-
-          // Dosya türüne göre uygun okuma metodunu kullan
-          if (selectedFile.type.startsWith('text/') || selectedFile.type === 'application/json') {
-              reader.readAsText(selectedFile);
-          } else if (selectedFile.type.startsWith('image/')) {
-              reader.readAsDataURL(selectedFile);
-          } else {
-              // Diğer ikili dosyalar için ArrayBuffer olarak oku
-              reader.readAsArrayBuffer(selectedFile);
+        fileStatus.textContent = `Dosya: ${selectedFile.name}`;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const fileContent = e.target.result;
+          try {
+            const jsonData = JSON.parse(fileContent);
+            Blockly.Events.disable();
+            Blockly.serialization.workspaces.load(jsonData, ws, false);
+            Blockly.Events.enable();
+            updateCodeDisplay();
+          } catch (error) {
+            console.error('Dosya okuma veya JSON ayrıştırma hatası:', error);
+            fileStatus.textContent = `Hata: Geçersiz dosya formatı.`;
+            // Dosya yükleme başarılıysa durumu güncelle
+            fileStatus.textContent = `Dosya yüklendi: ${selectedFile.name}`;
           }
-
+        };
+        reader.onerror = (error) => {
+          console.error('Dosya okuma hatası:', error);
+          fileStatus.textContent = 'Dosya okuma hatası.';
+        };
+        reader.readAsText(selectedFile);
       } else {
-          fileContentDisplay.innerHTML = '<p>Henüz dosya seçilmedi.</p>';
+        fileStatus.textContent = 'Dosya seçilmedi';
       }
-  });
+    });
   }
+
   if (clearButton) {
-    clearButton.addEventListener('click', (event) => {
-      const jsonData = JSON.parse("{}");
-      Blockly.Events.disable();
-      Blockly.serialization.workspaces.load(jsonData, ws, false);
-      Blockly.Events.enable();
-      runCode();
-  });
+    clearButton.addEventListener('click', () => {
+      Blockly.serialization.workspaces.load({}, ws, false);
+      updateCodeDisplay();
+    }); 
   }
+  
+  if (runButton) {
+    runButton.addEventListener('click', runCode);
+  }
+
 });

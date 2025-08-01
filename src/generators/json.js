@@ -75,7 +75,6 @@ jsonGenerator.forBlock['object'] = function (block, generator) {
   return [code, Order.ATOMIC];
 };
 
-
 jsonGenerator.forBlock['text_output'] = function (block, generator) {
   const text = String(block.getFieldValue('OUTPUT_TEXT'));
   const code = `print ${text}`;
@@ -107,4 +106,31 @@ jsonGenerator.forBlock['arithmetic'] = function (block, generator) {
   const code = n1 + " " + op + " " + n2;
   return [code, Order.ATOMIC];
 };
+
+jsonGenerator.forBlock['variable_set'] = function (block, generator) {
+  const varName = block.getFieldValue('VAR_NAME');
+  const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+  const code = `${varName} = ${value}`;
+  return code;
+}
+
+jsonGenerator.forBlock['arithmetic_comparison'] = function (block, generator) {
+  const op = String(block.getFieldValue('DROPDOWN'));
+  const n1 = generator.valueToCode(block, 'NUM1', Order.ATOMIC);
+  const n2 = generator.valueToCode(block, 'NUM2', Order.ATOMIC);
+  const code = n1 + " " + op + " " + n2;
+  return [code, Order.ATOMIC];
+};
+
+jsonGenerator.forBlock['if_else'] = function (block, generator) {
+  const condition = generator.valueToCode(block, 'CONDITION', Order.ATOMIC);
+  const ifBranch = generator.statementToCode(block, 'IF_BRANCH');
+  const elseBranch = generator.statementToCode(block, 'ELSE_BRANCH');
+  
+  let code = `if ${condition}:\n${ifBranch}`;
+  if (elseBranch) {
+    code += `else:\n${elseBranch}`;
+  }
+  return code;
+}
 

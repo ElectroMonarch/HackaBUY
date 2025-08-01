@@ -7,6 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/pyscript.css" />
+  <script src="https://pyscript.net/releases/2024.1.1/pyscript.js"></script>
+  
   <style>
     /* Basic Reset & Font */
     body {
@@ -211,6 +214,8 @@
         <input type="file" id="fileInput">
         <button id="downloadDataButton">Kodu İndir</button>
         <button id="clearButton">Tahtayı sil</button>
+        <button id="runButton">Çalıştır</button>
+        <span id="fileStatus">Dosya seçilmedi</span>
       </div>
 
       <div id="workspace-area">
@@ -225,5 +230,13 @@
       </div>
     </main>
   </div>
+
+  <py-script>
+    # Bu PyScript etiketi, Python kodunuzu çalıştırmak için kullanılır.
+    # Çıktıyı HTML'deki 'output' id'li div'e yönlendirmek için pyscript.write() kullanıyoruz.
+    # Bu etiket başlangıçta boş kalacak ve JavaScript ile doldurulacak.
+  </py-script>
+
+  <script type="module" src="./index.js"></script>
 </body>
 </html>

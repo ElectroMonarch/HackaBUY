@@ -70,6 +70,37 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
     colour: 230,
   },
   {
+    type: 'variable_set',
+    message0: 'Değişken %1 değerini %2 olarak ayarla',
+    args0: [
+      {
+        type: 'field_input',
+        name: 'VAR_NAME',
+        text: 'değişken_ismi',
+      },
+      {
+        type: 'input_value',
+        name: 'VALUE',
+      },
+    ],
+    previousStatement: null,
+    nextStatement: null,
+    colour: 0,
+  },
+  {
+    type: 'math_number',
+    message0: '%1',
+    args0: [
+      {
+        type: 'field_number',
+        name: 'NUM',
+        value: 0,
+      },
+    ],
+    output: null,
+    colour: 230,
+  },
+  {
     type: 'variable',
     message0: '%1',
     args0: [
@@ -95,8 +126,9 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
         options: [
         [ "+", "+" ],
         [ "-", "-" ],
-        [ "*", "*" ],
+        [ "x", "*" ],
         [ "/", "/" ],
+        [ "%", "%" ],
         ]
       },
       {
@@ -110,12 +142,64 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
     output: null,
     colour: 0,
   },
-
-
-
-
-
-
+  {
+    type: 'arithmetic_comparison',
+    message0: '%1 %2 %3 %4', 
+        args0: [
+      {
+        type: 'input_value',
+        name: 'NUM1',
+      },
+      {
+        type: 'field_dropdown',
+        name: 'DROPDOWN',
+        options: [
+        [ "==", "==" ],
+        [ ">=", ">=" ],
+        [ "<=", "<=" ],
+        [ ">", ">" ],
+        [ "<", "<" ],
+        ]
+      },
+      {
+        type: 'input_value',
+        name: 'NUM2',
+      },
+      {
+        type: 'input_dummy',
+      },
+    ],
+    output: null,
+    colour: 0,
+  },
+  {
+    type: 'if_else',
+    message0: 'Eğer %1 %2 %3 %4',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'CONDITION',
+      },
+      {
+        type: 'field_dropdown',
+        name: 'DROPDOWN',
+        options: [
+        [ "==", "==" ],
+        [ ">=", ">=" ],
+        [ "<=", "<=" ],
+        [ ">", ">" ],
+        [ "<", "<" ],
+        ],
+      },
+      {
+        type: 'input_value',
+        name: 'VALUE',
+      },
+      {
+        type: 'input_dummy',
+      },
+    ],
+  },
   {
     type: 'object',
     message0: '{ %1 %2 }',
@@ -154,4 +238,5 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
     nextStatement: null,
     colour: 230,
   },
+  
 ]);

@@ -13,6 +13,10 @@ export const toolbox = {
     },
     {
       kind: 'block',
+      type: 'variable_set',
+    },
+    {
+      kind: 'block',
       type: 'number_output',
     },
     {
@@ -31,8 +35,10 @@ export const toolbox = {
       kind: 'block',
       type: 'arithmetic'
     },
-
-
+        {
+      kind: 'block',
+      type: 'arithmetic_comparison'
+    },
     {
       kind: 'block',
       type: 'object',
@@ -53,5 +59,10 @@ export const toolbox = {
       kind: 'block',
       type: 'lists_create_with',
     },
+    {
+      kind: 'block', 
+      type: 'if_else',
+    },
   ],
+  
 };
