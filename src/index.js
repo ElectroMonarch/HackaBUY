@@ -16,6 +16,7 @@ const ws = Blockly.inject(blocklyDiv, {toolbox});
 
 // Bu fonksiyon, Blockly'den kodu oluşturur ve HTML'e yazar
 const updateCodeDisplay = () => {
+  
   const code = jsonGenerator.workspaceToCode(ws);
   codeDiv.innerText = code;
 };

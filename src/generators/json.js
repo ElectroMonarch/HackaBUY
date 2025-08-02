@@ -6,11 +6,14 @@ const Order = {
   ATOMIC: 0,
 };
 
+const variable_names_set = new Set([]);
+
 jsonGenerator.scrub_ = function (block, code, thisOnly) {
   const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
   if (nextBlock && !thisOnly) {
     return code + '\n' + jsonGenerator.blockToCode(nextBlock);
   }
+  variable_names_set.clear();
   return code;
 };
 
@@ -36,15 +39,28 @@ jsonGenerator.forBlock['number_output'] = function (block, generator) {
   return code;
 };
 
+
 jsonGenerator.forBlock['for_loop'] = function (block, generator) {
   const count = generator.valueToCode(block, 'LOOP_ITERATION_COUNT', Order.ATOMIC);
   const statementMembers = generator.statementToCode(block, 'MEMBERS');
-  const code = 'for i in range(' + count + '):\n' + statementMembers + '\n';
+
+  //döngü değişkeni için kullanılmamış isim bulma
+  let donguDegiskeni = 'i';
+  let alphabet = "ijklmnopqrstuvwxyzabcdefgh";
+  for (let i = 0; ; i++){
+    if (!variable_names_set.has(alphabet[i])){
+      donguDegiskeni = alphabet[i];
+      break;
+    }
+  }
+  variable_names_set.add(donguDegiskeni);
+  const code = 'for ' + donguDegiskeni + ' in range(' + count + '):\n' + statementMembers + '\n';
   return code;
 };
 
 jsonGenerator.forBlock['variable'] = function (block) {
   const code = String(block.getFieldValue('VAR_NAME'));
+  variable_names_set.add(code);
   return [code, Order.ATOMIC];
 };
 
@@ -60,6 +76,7 @@ jsonGenerator.forBlock['variable_set'] = function (block, generator) {
   const varName = block.getFieldValue('VAR_NAME');
   const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
   const code = `${varName} = ${value}`;
+  variable_names_set.add(varName);
   return code;
 }
 
