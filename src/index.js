@@ -55,6 +55,7 @@ const runCode = () => {
     const newPyScriptTag = document.createElement('py-script');
     newPyScriptTag.innerHTML = pyScriptTag.innerHTML;
     pyScriptTag.parentNode.replaceChild(newPyScriptTag, pyScriptTag);
+    
 };
 
 
