@@ -1,14 +1,3 @@
-/**
- * @license
- * Copyright 2023 Google LLC
- * SPDX-License-Identifier: Apache-2.0
- */
-
-/**
- * @fileoverview The full custom JSON generator built during the custom
- * generator codelab.
- */
-
 import * as Blockly from 'blockly';
 
 export const jsonGenerator = new Blockly.Generator('JSON');
@@ -24,7 +13,6 @@ jsonGenerator.scrub_ = function (block, code, thisOnly) {
   }
   return code;
 };
-
 
 jsonGenerator.forBlock['math_number'] = function (block) {
   const code = String(block.getFieldValue('NUM'));

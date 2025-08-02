@@ -1,15 +1,10 @@
-/**
- * @license
- * Copyright 2023 Google LLC
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import * as Blockly from 'blockly';
 import {blocks} from './blocks/json.js';
 import {jsonGenerator} from './generators/json.js';
 import {save, load} from './serialization.js';
 import {toolbox} from './toolbox.js';
 import './index.css';
+
 
 // Register the blocks with Blockly
 Blockly.common.defineBlocks(blocks);
@@ -25,62 +20,64 @@ const updateCodeDisplay = () => {
   codeDiv.innerText = code;
 };
 
-// Bu fonksiyon, Blockly'den kodu alır ve PyScript'in çalıştırabileceği bir HTML öğesine yerleştirir.
-const runCode = () => {
-    const codeToRun = jsonGenerator.workspaceToCode(ws);
-    
-    const pyScriptTag = document.querySelector('py-script');
-    
-    // Çıktı alanını temizle
-    const outputDiv = document.getElementById('output');
-    outputDiv.innerHTML = 'Uygulama mesajları veya çıktıları burada görünecek.';
-    
-    // PyScript'e kodu ve çıktının yazılacağı yeri söyle
-    // print fonksiyonunu override ederek çıktıyı HTML'e yazmasını sağla
-    pyScriptTag.innerHTML = `
-        from js import document
-        from pyodide.ffi import to_js
 
-        def custom_print(*args, sep=' ', end='\\n', file=None):
-            output_el = document.getElementById('output')
-            output_el.innerHTML += sep.join(str(x) for x in args) + end
-            output_el.scrollTop = output_el.scrollHeight
+// runCode fonksiyonunu window objesine atayarak global erişim sağlandı
+window.runCode = async () => {
+  // Blockly'den temiz, sadece Python kodu olan bir metin al.
+  const codeToRun = jsonGenerator.workspaceToCode(ws);
+  
+  // Çıktı div'ini al.
+  const outputDiv = document.getElementById('output');
+  if (!outputDiv) {
+    console.error('Çıktı divi bulunamadı.');
+    return;
+  }
+  
+  // Bu, PyScript'e gönderilecek olan Python kodudur.
+  const pythonCodeWithOutput = 
+  `
+  # Bu kod, PyScript çıktısını doğrudan HTML'deki div'e yazar.
+  import sys
+  from js import document
 
-        __builtins__.print = custom_print
-
-        ${codeToRun}
-    `;
-
-    // PyScript'i yeniden başlatarak yeni kodu çalıştır
-    const newPyScriptTag = document.createElement('py-script');
-    newPyScriptTag.innerHTML = pyScriptTag.innerHTML;
-    pyScriptTag.parentNode.replaceChild(newPyScriptTag, pyScriptTag);
+  class OutputCatcher:
+    def __init__(self, element_id):
+        self.output_element = document.getElementById(element_id)
+        self.output_element.innerHTML = ''
     
+    def write(self, s):
+        # PyScript'teki Pyodide, çıktıyı buraya gönderir.
+        self.output_element.innerHTML += s
+
+  sys.stdout = OutputCatcher('output')
+
+  ${codeToRun}
+  `;
+
+  // PyScript runtime kontrolü
+  if (!window.pyscript || !window.pyscript.runtime) {
+    console.error('PyScript runtime bulunamıyor.');
+    outputDiv.innerHTML = '<span style="color: red;">Hata: PyScript ortamı başlatılamadı veya hazır değil.</span>';
+    return;
+  }
+
+  // Önceki çıktıyı temizle
+  outputDiv.innerHTML = '<div style="color: #6c757d; font-style: italic;">Kod çalıştırılıyor...</div>';
+
+  try {
+    // PyScript API'sini kullanarak kodu çalıştır.
+    await window.pyscript.runtime.runPythonAsync(pythonCodeWithOutput);
+  } catch (error) {
+    console.error('Kod çalıştırma hatası:', error);
+    outputDiv.innerHTML = `<span style="color: red;">Hata: ${error.toString()}</span>`;
+  }
 };
 
-
-// Load the initial state from storage and update the code display.
 load(ws);
 updateCodeDisplay();
 
-// Every time the workspace changes state, save the changes to storage.
 ws.addChangeListener((e) => {
-  // UI events are things like scrolling, zooming, etc.
-  // No need to save after one of these.
-  if (e.isUiEvent) return;
-  save(ws);
-});
-
-// Whenever the workspace changes meaningfully, update the code display.
-ws.addChangeListener((e) => {
-  // Don't run the code when the workspace finishes loading; we're
-  // already running it once when the application starts.
-  // Don't run the code during drags; we might have invalid state.
-  if (
-    e.isUiEvent ||
-    e.type == Blockly.Events.FINISHED_LOADING ||
-    ws.isDragging()
-  ) {
+  if (e.isUiEvent || e.type === Blockly.Events.FINISHED_LOADING || ws.isDragging()) {
     return;
   }
   updateCodeDisplay();
@@ -91,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const fileInput = document.getElementById('fileInput');
   const fileStatus = document.getElementById('fileStatus');
   const clearButton = document.getElementById('clearButton');
-
+  
   if (downloadButton) {
     downloadButton.addEventListener('click', () => {
       const userData = Blockly.serialization.workspaces.save(ws);
@@ -105,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
       URL.revokeObjectURL(url);
       console.log('Veri indirme işlemi başlatıldı.');
     });
+    updateCodeDisplay();
   }
 
   if (fileInput) {
@@ -124,8 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
           } catch (error) {
             console.error('Dosya okuma veya JSON ayrıştırma hatası:', error);
             fileStatus.textContent = `Hata: Geçersiz dosya formatı.`;
-            // Dosya yükleme başarılıysa durumu güncelle
-            fileStatus.textContent = `Dosya yüklendi: ${selectedFile.name}`;
           }
         };
         reader.onerror = (error) => {
@@ -137,17 +133,13 @@ document.addEventListener('DOMContentLoaded', () => {
         fileStatus.textContent = 'Dosya seçilmedi';
       }
     });
+    updateCodeDisplay();
   }
 
   if (clearButton) {
     clearButton.addEventListener('click', () => {
       Blockly.serialization.workspaces.load({}, ws, false);
       updateCodeDisplay();
-    }); 
+    });
   }
-  
-  if (runButton) {
-    runButton.addEventListener('click', runCode);
-  }
-
 });

@@ -7,26 +7,30 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/pyscript.css" />
-  <script src="https://pyscript.net/releases/2024.1.1/pyscript.js"></script>
-  
+  <link rel="stylesheet" href="https://pyscript.net/releases/2025.7.3/core.css">
+  <script type="module" src="https://pyscript.net/releases/2025.7.3/core.js"></script>
+  <script>
+    // PyScript'in hazır olmasını beklemek için bu event listener'ı ekliyoruz
+    document.addEventListener('py-ready', () => {
+      const runButton = document.getElementById('runButton');
+      // runCode fonksiyonunun global olarak erişilebilir olup olmadığı kontrol edildi
+      if (runButton && window.runCode) {
+        runButton.addEventListener('click', window.runCode); // window.runCode'a erişim sağlandı
+      }
+    });
+  </script>
   <style>
-    /* Basic Reset & Font */
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
       background-color: #343535;
       color: #ebe8e8;
     }
-
-    /* Container Styling */
     #app-container {
       display: flex;
       flex-direction: column;
       height: 100vh;
     }
-
-    /* Header */
     header {
       background-color: hsl(187, 100%, 9%);
       color: rgb(13, 160, 245);
@@ -34,63 +38,53 @@
       text-align: left;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-
     header h1 {
       margin: 0;
       font-size: 1.8em;
     }
-
-    /* Main Content Area */
     main {
       flex-grow: 1;
       display: flex;
-      flex-direction: column; /* Stack controls and workspace vertically */
+      flex-direction: column;
       padding: 20px;
-      gap: 20px; /* Space between sections */
+      gap: 20px;
     }
-
-    /* Controls Section */
     #controls {
       display: flex;
-      gap: 10px; /* Space between buttons */
-      flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+      gap: 10px;
+      flex-wrap: wrap;
       background-color: #fff;
       padding: 15px;
       border-radius: 8px;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      align-items: center; /* Vertically align items */
+      align-items: center;
     }
-
     #fileInputLabel {
-        background-color: rgba(13, 160, 245); /* Blue for primary actions */
-        color: white;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 1em;
-        transition: background-color 0.2s ease, transform 0.1s ease;
-        text-align: center;
-        white-space: nowrap; /* Prevent text wrapping */
+      background-color: rgba(13, 160, 245);
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+      text-align: center;
+      white-space: nowrap;
     }
-
     #fileInputLabel:hover {
-        background-color: rgb(14, 127, 192);
-        transform: translateY(-1px);
+      background-color: rgb(14, 127, 192);
+      transform: translateY(-1px);
     }
-
     #fileInput {
-        display: none; /* Hide the default file input */
+      display: none;
     }
-
     #fileStatus {
-        margin-left: 10px;
-        font-style: italic;
-        color: #666;
+      margin-left: 10px;
+      font-style: italic;
+      color: #666;
     }
-
     button {
-      background-color: #6c757d; /* Grey for secondary actions */
+      background-color: #6c757d;
       color: white;
       padding: 10px 15px;
       border: none;
@@ -99,106 +93,93 @@
       font-size: 1em;
       transition: background-color 0.2s ease, transform 0.1s ease;
     }
-
     button:hover {
       background-color: #5a6268;
       transform: translateY(-1px);
     }
-
-    /* Specific button styles */
     #downloadDataButton {
-      background-color: rgba(13, 160, 245); /* Green for download */
+      background-color: rgba(13, 160, 245);
     }
     #downloadDataButton:hover {
       background-color: rgb(14, 127, 192);
     }
-
-    /* Workspace and Output */
     #workspace-area {
       flex-grow: 1;
       display: flex;
       background-color: #fff;
       border-radius: 8px;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      overflow: hidden; /* Important for inner Blockly div */
+      overflow: hidden;
     }
-
     #outputPane {
-      flex: 1; /* Takes equal width */
+      flex: 1;
       display: flex;
       flex-direction: column;
       border-right: 1px solid #464444;
       padding: 15px;
-      background-color: #f8f8f8; /* Light background for code */
-      overflow-y: auto; /* Scroll for long code */
-      min-width: 300px; /* Ensure a minimum width */
+      background-color: #f8f8f8;
+      overflow-y: auto;
+      min-width: 300px;
     }
-
     #outputPane h2 {
-        font-size: 1.2em;
-        color: #555;
-        margin-top: 0;
-        margin-bottom: 10px;
-        border-bottom: 1px solid #eee;
-        padding-bottom: 5px;
+      font-size: 1.2em;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 5px;
     }
-
     #generatedCode {
       background-color: #eef;
       border: 1px solid #ddd;
       padding: 10px;
       border-radius: 5px;
-      white-space: pre-wrap; /* Preserve whitespace and wrap long lines */
-      word-break: break-all; /* Break long words */
-      overflow-x: auto; /* Horizontal scroll for very long lines */
-      flex-grow: 1; /* Allow code block to take available space */
-      margin-bottom: 15px; /* Space between code and general output */
+      white-space: pre-wrap;
+      word-break: break-all;
+      overflow-x: auto;
+      flex-grow: 1;
+      margin-bottom: 15px;
       color: #000;
     }
-
     #output {
       border: 1px solid #ddd;
       padding: 10px;
       border-radius: 5px;
       background-color: #fff;
-      min-height: 50px; /* Give some visual height */
+      min-height: 50px;
     }
-
     #blocklyDiv {
-      flex: 1; /* Takes equal width */
-      height: 100%; /* Important for Blockly to render */
-      min-width: 400px; /* Ensure Blockly area has min width */
-      background-color: #84a4b6; /* Blockly's background */
+      flex: 1;
+      height: 100%;
+      min-width: 400px;
+      background-color: #84a4b6;
     }
-
-    /* Responsive adjustments */
     @media (max-width: 768px) {
       main {
         padding: 10px;
       }
       #workspace-area {
-        flex-direction: column; /* Stack output and Blockly vertically */
+        flex-direction: column;
       }
       #outputPane {
         border-right: none;
         border-bottom: 1px solid #eee;
       }
       #blocklyDiv {
-        min-height: 400px; /* Ensure Blockly has enough height when stacked */
-        min-width: unset; /* Remove min-width for stacking */
+        min-height: 400px;
+        min-width: unset;
       }
     }
-
     @media (max-width: 480px) {
-        #controls {
-            flex-direction: column; /* Stack buttons on very small screens */
-            align-items: stretch; /* Stretch buttons to full width */
-        }
-        #fileStatus {
-            margin-left: 0;
-            margin-top: 5px;
-            text-align: center;
-        }
+      #controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      #fileStatus {
+        margin-left: 0;
+        margin-top: 5px;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -221,22 +202,28 @@
       <div id="workspace-area">
         <div id="outputPane">
           <h2>Oluşturulan Kod</h2>
-          <pre id="generatedCode"><code></code></pre>
+          <pre id="generatedCode"><code id="codeToRun"></code></pre>
+
           <h2>Uygulama Çıktısı</h2>
-          <div id="output" >Uygulama mesajları veya çıktıları burada görünecek.</div>
+          <div id="output">
+            <py-config>
+              <include src="./config.py"></include>
+            </py-config>
+
+            <py-script id="my-pyscript-runner">
+              # JavaScript ile dinamik olarak buraya eklenecek olan Python kodu çalışacak
+            </py-script>
+
+            <py-output>
+              # Kodun Çıktıları burada görünecek.
+            </py-output>
+          </div>
         </div>
         <div id="blocklyDiv">
-          </div>
+
+        </div>
       </div>
     </main>
   </div>
-
-  <py-script>
-    # Bu PyScript etiketi, Python kodunuzu çalıştırmak için kullanılır.
-    # Çıktıyı HTML'deki 'output' id'li div'e yönlendirmek için pyscript.write() kullanıyoruz.
-    # Bu etiket başlangıçta boş kalacak ve JavaScript ile doldurulacak.
-  </py-script>
-
-  <script type="module" src="./index.js"></script>
 </body>
 </html>
