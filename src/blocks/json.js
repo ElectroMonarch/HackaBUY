@@ -71,7 +71,7 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
   },
   {
     type: 'variable_set',
-    message0: 'Değişken %1 değerini %2 olarak ayarla',
+    message0: '%1 değişkeninin değerini %2 olarak ayarla',
     args0: [
       {
         type: 'field_input',
@@ -200,6 +200,122 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
       },
     ],
   },
+  {
+    type: 'if_block',
+    message0: 'Eğer %1 %2 %3 ise %4 %5',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'NUM1',
+      },
+      {
+        type: 'field_dropdown',
+        name: 'DROPDOWN',
+        options: [
+        [ "==", "==" ],
+        [ ">=", ">=" ],
+        [ "<=", "<=" ],
+        [ ">", ">" ],
+        [ "<", "<" ],
+        ],
+      },
+      {
+        type: 'input_value',
+        name: 'NUM2',
+      },
+      {
+        type: 'input_dummy',
+      },
+      {
+        type: 'input_statement',
+        name: 'MEMBERS',
+      },
+    ],
+    output: null,
+    colour: 230,
+  },
+  {
+    type: 'if_else_block',
+    message0: 'Eğer %1 %2 %3 ise %4 %5 %6 %7',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'NUM1',
+      },
+      {
+        type: 'field_dropdown',
+        name: 'DROPDOWN',
+        options: [
+        [ "==", "==" ],
+        [ ">=", ">=" ],
+        [ "<=", "<=" ],
+        [ ">", ">" ],
+        [ "<", "<" ],
+        ],
+      },
+      {
+        type: 'input_value',
+        name: 'NUM2',
+      },
+      {
+        type: 'input_dummy',
+      },
+      {
+        type: 'input_statement',
+        name: 'MEMBERS',
+      },
+      {
+        type: 'input_dummy',
+      },
+      {
+        type: 'input_statement',
+        name: 'MEMBERS2',
+      },
+    ],
+    output: null,
+    colour: 230,
+  },
+  {
+    type: 'while_block',
+    message0: '%1 %2 %3 olduğu sürece tekrarla %4 %5',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'NUM1',
+      },
+      {
+        type: 'field_dropdown',
+        name: 'DROPDOWN',
+        options: [
+        [ "==", "==" ],
+        [ ">=", ">=" ],
+        [ "<=", "<=" ],
+        [ ">", ">" ],
+        [ "<", "<" ],
+        ],
+      },
+      {
+        type: 'input_value',
+        name: 'NUM2',
+      },
+      {
+        type: 'input_dummy',
+      },
+      {
+        type: 'input_statement',
+        name: 'MEMBERS',
+      },
+    ],
+    output: null,
+    colour: 230,
+  },
+
+
+
+
+
+
+
   {
     type: 'object',
     message0: '{ %1 %2 }',

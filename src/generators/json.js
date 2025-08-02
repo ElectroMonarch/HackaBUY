@@ -77,7 +77,7 @@ jsonGenerator.forBlock['object'] = function (block, generator) {
 
 jsonGenerator.forBlock['text_output'] = function (block, generator) {
   const text = String(block.getFieldValue('OUTPUT_TEXT'));
-  const code = `print ${text}`;
+  const code = `print "${text}"`;
   return code;
 };
 
@@ -114,6 +114,40 @@ jsonGenerator.forBlock['variable_set'] = function (block, generator) {
   return code;
 }
 
+jsonGenerator.forBlock['if_block'] = function (block, generator) {
+  const op = String(block.getFieldValue('DROPDOWN'));
+  const n1 = generator.valueToCode(block, 'NUM1', Order.ATOMIC);
+  const n2 = generator.valueToCode(block, 'NUM2', Order.ATOMIC);
+  const line = `if ${n1} ${op} ${n2}`
+  const statementMembers = generator.statementToCode(block, 'MEMBERS');
+  const code = line + ':\n' + statementMembers + '\n';
+  return [code, Order.ATOMIC];
+};
+
+jsonGenerator.forBlock['if_else_block'] = function (block, generator) {
+  const op = String(block.getFieldValue('DROPDOWN'));
+  const n1 = generator.valueToCode(block, 'NUM1', Order.ATOMIC);
+  const n2 = generator.valueToCode(block, 'NUM2', Order.ATOMIC);
+  const line = `if ${n1} ${op} ${n2}`
+  const statementMembers = generator.statementToCode(block, 'MEMBERS');
+  const statementMembers2 = generator.statementToCode(block, 'MEMBERS2');
+  const code = line + ':\n' + statementMembers + 'else\n' + statementMembers2;
+  return [code, Order.ATOMIC];
+};
+
+jsonGenerator.forBlock['while_block'] = function (block, generator) {
+  const op = String(block.getFieldValue('DROPDOWN'));
+  const n1 = generator.valueToCode(block, 'NUM1', Order.ATOMIC);
+  const n2 = generator.valueToCode(block, 'NUM2', Order.ATOMIC);
+  const line = `while ${n1} ${op} ${n2}`
+  const statementMembers = generator.statementToCode(block, 'MEMBERS');
+  const code = line + ':\n' + statementMembers + '\n';
+  return [code, Order.ATOMIC];
+};
+
+
+
+
 jsonGenerator.forBlock['arithmetic_comparison'] = function (block, generator) {
   const op = String(block.getFieldValue('DROPDOWN'));
   const n1 = generator.valueToCode(block, 'NUM1', Order.ATOMIC);
@@ -133,4 +167,5 @@ jsonGenerator.forBlock['if_else'] = function (block, generator) {
   }
   return code;
 }
+
 

@@ -35,7 +35,23 @@ export const toolbox = {
       kind: 'block',
       type: 'arithmetic'
     },
-        {
+    {
+      kind: 'block', 
+      type: 'if_block',
+    },
+    {
+      kind: 'block', 
+      type: 'if_else_block',
+    },
+    {
+      kind: 'block', 
+      type: 'while_block',
+    },
+
+
+
+
+    {
       kind: 'block',
       type: 'arithmetic_comparison'
     },
