@@ -25,15 +25,6 @@ jsonGenerator.scrub_ = function (block, code, thisOnly) {
   return code;
 };
 
-jsonGenerator.forBlock['logic_null'] = function (block) {
-  return ['null', Order.ATOMIC];
-};
-
-jsonGenerator.forBlock['text'] = function (block) {
-  const textValue = block.getFieldValue('TEXT');
-  const code = `"${textValue}"`;
-  return [code, Order.ATOMIC];
-};
 
 jsonGenerator.forBlock['math_number'] = function (block) {
   const code = String(block.getFieldValue('NUM'));
@@ -45,36 +36,6 @@ jsonGenerator.forBlock['logic_boolean'] = function (block) {
   return [code, Order.ATOMIC];
 };
 
-jsonGenerator.forBlock['member'] = function (block, generator) {
-  const name = block.getFieldValue('MEMBER_NAME');
-  const value = generator.valueToCode(block, 'MEMBER_VALUE', Order.ATOMIC);
-  const code = `"${name}" zort : ${value}`;
-  return code;
-};
-
-jsonGenerator.forBlock['lists_create_with'] = function (block, generator) {
-  const values = [];
-  for (let i = 0; i < block.itemCount_; i++) {
-    const valueCode = generator.valueToCode(block, 'ADD' + i, Order.ATOMIC);
-    if (valueCode) {
-      values.push(valueCode);
-    }
-  }
-  const valueString = values.join(',\n');
-  const indentedValueString = generator.prefixLines(
-    valueString,
-    generator.INDENT,
-  );
-  const codeString = '[\n' + indentedValueString + '\n]';
-  return [codeString, Order.ATOMIC];
-};
-
-jsonGenerator.forBlock['object'] = function (block, generator) {
-  const statementMembers = generator.statementToCode(block, 'MEMBERS');
-  const code = '{\n' + statementMembers + '\n}';
-  return [code, Order.ATOMIC];
-};
-
 jsonGenerator.forBlock['text_output'] = function (block, generator) {
   const text = String(block.getFieldValue('OUTPUT_TEXT'));
   const code = `print "${text}"`;
@@ -83,7 +44,7 @@ jsonGenerator.forBlock['text_output'] = function (block, generator) {
 
 jsonGenerator.forBlock['number_output'] = function (block, generator) {
   const value = generator.valueToCode(block, 'MEMBER_VALUE', Order.ATOMIC);
-  const code = `print number ${value}`;
+  const code = `print ${value}`;
   return code;
 };
 
@@ -103,7 +64,7 @@ jsonGenerator.forBlock['arithmetic'] = function (block, generator) {
   const op = String(block.getFieldValue('DROPDOWN'));
   const n1 = generator.valueToCode(block, 'NUM1', Order.ATOMIC);
   const n2 = generator.valueToCode(block, 'NUM2', Order.ATOMIC);
-  const code = n1 + " " + op + " " + n2;
+  const code = "(" + n1 + " " + op + " " + n2 + ")";
   return [code, Order.ATOMIC];
 };
 
@@ -121,7 +82,7 @@ jsonGenerator.forBlock['if_block'] = function (block, generator) {
   const line = `if ${n1} ${op} ${n2}`
   const statementMembers = generator.statementToCode(block, 'MEMBERS');
   const code = line + ':\n' + statementMembers + '\n';
-  return [code, Order.ATOMIC];
+  return code;
 };
 
 jsonGenerator.forBlock['if_else_block'] = function (block, generator) {
@@ -131,8 +92,8 @@ jsonGenerator.forBlock['if_else_block'] = function (block, generator) {
   const line = `if ${n1} ${op} ${n2}`
   const statementMembers = generator.statementToCode(block, 'MEMBERS');
   const statementMembers2 = generator.statementToCode(block, 'MEMBERS2');
-  const code = line + ':\n' + statementMembers + 'else\n' + statementMembers2;
-  return [code, Order.ATOMIC];
+  const code = line + ':\n' + statementMembers + '\nelse\n' + statementMembers2;
+  return code;
 };
 
 jsonGenerator.forBlock['while_block'] = function (block, generator) {
@@ -142,30 +103,7 @@ jsonGenerator.forBlock['while_block'] = function (block, generator) {
   const line = `while ${n1} ${op} ${n2}`
   const statementMembers = generator.statementToCode(block, 'MEMBERS');
   const code = line + ':\n' + statementMembers + '\n';
-  return [code, Order.ATOMIC];
-};
-
-
-
-
-jsonGenerator.forBlock['arithmetic_comparison'] = function (block, generator) {
-  const op = String(block.getFieldValue('DROPDOWN'));
-  const n1 = generator.valueToCode(block, 'NUM1', Order.ATOMIC);
-  const n2 = generator.valueToCode(block, 'NUM2', Order.ATOMIC);
-  const code = n1 + " " + op + " " + n2;
-  return [code, Order.ATOMIC];
-};
-
-jsonGenerator.forBlock['if_else'] = function (block, generator) {
-  const condition = generator.valueToCode(block, 'CONDITION', Order.ATOMIC);
-  const ifBranch = generator.statementToCode(block, 'IF_BRANCH');
-  const elseBranch = generator.statementToCode(block, 'ELSE_BRANCH');
-  
-  let code = `if ${condition}:\n${ifBranch}`;
-  if (elseBranch) {
-    code += `else:\n${elseBranch}`;
-  }
   return code;
-}
+};
 
 

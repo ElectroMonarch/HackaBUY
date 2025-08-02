@@ -48,37 +48,6 @@ export const toolbox = {
       type: 'while_block',
     },
 
-
-
-
-    {
-      kind: 'block',
-      type: 'arithmetic_comparison'
-    },
-    {
-      kind: 'block',
-      type: 'object',
-    },
-    {
-      kind: 'block',
-      type: 'member',
-    },
-    {
-      kind: 'block',
-      type: 'text',
-    },
-    {
-      kind: 'block',
-      type: 'logic_null',
-    },
-    {
-      kind: 'block',
-      type: 'lists_create_with',
-    },
-    {
-      kind: 'block', 
-      type: 'if_else',
-    },
   ],
   
 };

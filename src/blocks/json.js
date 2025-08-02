@@ -143,64 +143,6 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
     colour: 0,
   },
   {
-    type: 'arithmetic_comparison',
-    message0: '%1 %2 %3 %4', 
-        args0: [
-      {
-        type: 'input_value',
-        name: 'NUM1',
-      },
-      {
-        type: 'field_dropdown',
-        name: 'DROPDOWN',
-        options: [
-        [ "==", "==" ],
-        [ ">=", ">=" ],
-        [ "<=", "<=" ],
-        [ ">", ">" ],
-        [ "<", "<" ],
-        ]
-      },
-      {
-        type: 'input_value',
-        name: 'NUM2',
-      },
-      {
-        type: 'input_dummy',
-      },
-    ],
-    output: null,
-    colour: 0,
-  },
-  {
-    type: 'if_else',
-    message0: 'Eğer %1 %2 %3 %4',
-    args0: [
-      {
-        type: 'input_value',
-        name: 'CONDITION',
-      },
-      {
-        type: 'field_dropdown',
-        name: 'DROPDOWN',
-        options: [
-        [ "==", "==" ],
-        [ ">=", ">=" ],
-        [ "<=", "<=" ],
-        [ ">", ">" ],
-        [ "<", "<" ],
-        ],
-      },
-      {
-        type: 'input_value',
-        name: 'VALUE',
-      },
-      {
-        type: 'input_dummy',
-      },
-    ],
-  },
-  {
     type: 'if_block',
     message0: 'Eğer %1 %2 %3 ise %4 %5',
     args0: [
@@ -231,12 +173,13 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
         name: 'MEMBERS',
       },
     ],
-    output: null,
+    previousStatement: null,
+    nextStatement: null,
     colour: 230,
   },
   {
     type: 'if_else_block',
-    message0: 'Eğer %1 %2 %3 ise %4 %5 %6 %7',
+    message0: 'Eğer %1 %2 %3 ise %4 %5 değilse %6 %7',
     args0: [
       {
         type: 'input_value',
@@ -272,7 +215,8 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
         name: 'MEMBERS2',
       },
     ],
-    output: null,
+    previousStatement: null,
+    nextStatement: null,
     colour: 230,
   },
   {
@@ -306,53 +250,10 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
         name: 'MEMBERS',
       },
     ],
-    output: null,
-    colour: 230,
-  },
-
-
-
-
-
-
-
-  {
-    type: 'object',
-    message0: '{ %1 %2 }',
-    args0: [
-      {
-        type: 'input_dummy',
-      },
-      {
-        type: 'input_statement',
-        name: 'MEMBERS',
-      },
-    ],
-    output: null,
-    colour: 230,
-  },
-  {
-    type: 'member',
-    message0: '%1 %2 %3',
-    args0: [
-      {
-        type: 'field_input',
-        name: 'MEMBER_NAME',
-        text: '',
-      },
-      {
-        type: 'field_label',
-        name: 'COLON',
-        text: 'ığüşçö',
-      },
-      {
-        type: 'input_value',
-        name: 'MEMBER_VALUE',
-      },
-    ],
     previousStatement: null,
     nextStatement: null,
     colour: 230,
   },
+
   
 ]);
