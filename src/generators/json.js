@@ -29,13 +29,13 @@ jsonGenerator.forBlock['logic_boolean'] = function (block) {
 
 jsonGenerator.forBlock['text_output'] = function (block, generator) {
   const text = String(block.getFieldValue('OUTPUT_TEXT'));
-  const code = `print "${text}"`;
+  const code = `print("${text}")`;
   return code;
 };
 
 jsonGenerator.forBlock['number_output'] = function (block, generator) {
   const value = generator.valueToCode(block, 'MEMBER_VALUE', Order.ATOMIC);
-  const code = `print ${value}`;
+  const code = `print(${value})`;
   return code;
 };
 
