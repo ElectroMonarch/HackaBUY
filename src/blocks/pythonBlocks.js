@@ -1,14 +1,3 @@
-/**
- * @license
- * Copyright 2023 Google LLC
- * SPDX-License-Identifier: Apache-2.0
- */
-
-/**
- * @fileoverview All the custom JSON-related blocks defined in the custom
- * generator codelab.
- */
-
 import * as Blockly from 'blockly';
 
 export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
@@ -254,6 +243,19 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
     nextStatement: null,
     colour: 230,
   },
-
+  {
+    type: 'break_block',
+    message0: '%1',
+    args0: [
+      {
+        type: 'field_label',
+        name: 'TEXT_OUTPUT_LABEL',
+        text: 'Döngüyü sonlandır',
+      }
+    ],
+    previousStatement: null,
+    nextStatement: null,
+    colour: 180,
+  },
   
 ]);

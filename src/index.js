@@ -1,77 +1,21 @@
 import * as Blockly from 'blockly';
-import {blocks} from './blocks/json.js';
-import {jsonGenerator} from './generators/json.js';
+import {blocks} from './blocks/pythonBlocks.js';
+import {pythonGenerator} from './generators/pythonGenerators.js';
 import {save, load} from './serialization.js';
 import {toolbox} from './toolbox.js';
 import './index.css';
 
 
-// Register the blocks with Blockly
 Blockly.common.defineBlocks(blocks);
 
-// Set up UI elements and inject Blockly
 const codeDiv = document.getElementById('generatedCode').firstChild;
 const blocklyDiv = document.getElementById('blocklyDiv');
 const ws = Blockly.inject(blocklyDiv, {toolbox});
 
-// Bu fonksiyon, Blockly'den kodu oluşturur ve HTML'e yazar
 const updateCodeDisplay = () => {
-  
-  const code = jsonGenerator.workspaceToCode(ws);
+  const code = pythonGenerator.workspaceToCode(ws);
+  pythonGenerator.clear_names_set();
   codeDiv.innerText = code;
-};
-
-
-// runCode fonksiyonunu window objesine atayarak global erişim sağlandı
-window.runCode = async () => {
-  // Blockly'den temiz, sadece Python kodu olan bir metin al.
-  const codeToRun = jsonGenerator.workspaceToCode(ws);
-  
-  // Çıktı div'ini al.
-  const outputDiv = document.getElementById('output');
-  if (!outputDiv) {
-    console.error('Çıktı divi bulunamadı.');
-    return;
-  }
-  
-  // Bu, PyScript'e gönderilecek olan Python kodudur.
-  const pythonCodeWithOutput = 
-  `
-  # Bu kod, PyScript çıktısını doğrudan HTML'deki div'e yazar.
-  import sys
-  from js import document
-
-  class OutputCatcher:
-    def __init__(self, element_id):
-        self.output_element = document.getElementById(element_id)
-        self.output_element.innerHTML = ''
-    
-    def write(self, s):
-        # PyScript'teki Pyodide, çıktıyı buraya gönderir.
-        self.output_element.innerHTML += s
-
-  sys.stdout = OutputCatcher('output')
-
-  ${codeToRun}
-  `;
-
-  // PyScript runtime kontrolü
-  if (!window.pyscript || !window.pyscript.runtime) {
-    console.error('PyScript runtime bulunamıyor.');
-    outputDiv.innerHTML = '<span style="color: red;">Hata: PyScript ortamı başlatılamadı veya hazır değil.</span>';
-    return;
-  }
-
-  // Önceki çıktıyı temizle
-  outputDiv.innerHTML = '<div style="color: #6c757d; font-style: italic;">Kod çalıştırılıyor...</div>';
-
-  try {
-    // PyScript API'sini kullanarak kodu çalıştır.
-    await window.pyscript.runtime.runPythonAsync(pythonCodeWithOutput);
-  } catch (error) {
-    console.error('Kod çalıştırma hatası:', error);
-    outputDiv.innerHTML = `<span style="color: red;">Hata: ${error.toString()}</span>`;
-  }
 };
 
 load(ws);

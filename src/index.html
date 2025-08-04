@@ -7,18 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://pyscript.net/releases/2025.7.3/core.css">
-  <script type="module" src="https://pyscript.net/releases/2025.7.3/core.js"></script>
-  <script>
-    // PyScript'in hazır olmasını beklemek için bu event listener'ı ekliyoruz
-    document.addEventListener('py-ready', () => {
-      const runButton = document.getElementById('runButton');
-      // runCode fonksiyonunun global olarak erişilebilir olup olmadığı kontrol edildi
-      if (runButton && window.runCode) {
-        runButton.addEventListener('click', window.runCode); // window.runCode'a erişim sağlandı
-      }
-    });
-  </script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.28.0/full/pyodide.js"></script>
   <style>
     body {
       margin: 0;
@@ -142,10 +131,11 @@
       color: #000;
     }
     #output {
-      border: 1px solid #ddd;
+      border: 1px solid #111111;
       padding: 10px;
       border-radius: 5px;
-      background-color: #fff;
+      background-color: #000000;
+      white-space: pre-wrap;
       min-height: 50px;
     }
     #blocklyDiv {
@@ -195,8 +185,10 @@
         <input type="file" id="fileInput">
         <button id="downloadDataButton">Kodu İndir</button>
         <button id="clearButton">Tahtayı sil</button>
-        <button id="runButton">Çalıştır</button>
+        <button id="runButton" onclick="evaluatePython()">Çalıştır</button>
         <span id="fileStatus">Dosya seçilmedi</span>
+        <input type="text" id="promptInputField">
+        <button id="AskAIButton">Yapay zekaya sor</button>
       </div>
 
       <div id="workspace-area">
@@ -206,17 +198,7 @@
 
           <h2>Uygulama Çıktısı</h2>
           <div id="output">
-            <py-config>
-              <include src="./config.py"></include>
-            </py-config>
-
-            <py-script id="my-pyscript-runner">
-              # JavaScript ile dinamik olarak buraya eklenecek olan Python kodu çalışacak
-            </py-script>
-
-            <py-output>
-              # Kodun Çıktıları burada görünecek.
-            </py-output>
+            Kodun çıktıları burada gözükecek.
           </div>
         </div>
         <div id="blocklyDiv">
@@ -225,5 +207,27 @@
       </div>
     </main>
   </div>
+  <script>
+    const outputDiv = document.getElementById("output");
+    const codeDiv = document.getElementById("generatedCode").firstChild;
+    async function main() {
+        let pyodide = await loadPyodide();
+        output.value += "Ready!\n";
+        return pyodide;
+      }
+    let pyodideReadyPromise = main();
+    async function evaluatePython() {
+      let code = "" + codeDiv.innerText;
+      let pyodide = await pyodideReadyPromise;
+      let output = "";
+      pyodide.setStdout({ batched: (msg) => output += msg + "\n" });
+        try {
+          pyodide.runPython(code);
+        } catch (err) {
+          output = err;
+        }
+      outputDiv.innerHTML = output;
+    }
+  </script>
 </body>
 </html>
