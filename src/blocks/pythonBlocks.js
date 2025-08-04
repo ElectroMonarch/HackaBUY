@@ -17,7 +17,7 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
     ],
     previousStatement: null,
     nextStatement: null,
-    colour: 180,
+    colour: 160,
   },
   {
     type: 'text_output',
@@ -36,7 +36,7 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
     ],
     previousStatement: null,
     nextStatement: null,
-    colour: 180,
+    colour: 160,
   },
   {
     type: 'for_loop',
@@ -56,7 +56,7 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
     ],
     previousStatement: null,
     nextStatement: null,
-    colour: 230,
+    colour: 290,
   },
   {
     type: 'variable_set',
@@ -74,7 +74,7 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
     ],
     previousStatement: null,
     nextStatement: null,
-    colour: 0,
+    colour: 330,
   },
   {
     type: 'math_number',
@@ -99,7 +99,7 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
       },
     ],
     output: null,
-    colour: 0,
+    colour: 330,
   },
   {
     type: 'arithmetic',
@@ -129,7 +129,7 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
       },
     ],
     output: null,
-    colour: 0,
+    colour: 230,
   },
   {
     type: 'if_block',
@@ -144,6 +144,7 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
         name: 'DROPDOWN',
         options: [
         [ "==", "==" ],
+        [ "!=", "!=" ],
         [ ">=", ">=" ],
         [ "<=", "<=" ],
         [ ">", ">" ],
@@ -164,7 +165,7 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
     ],
     previousStatement: null,
     nextStatement: null,
-    colour: 230,
+    colour: 20,
   },
   {
     type: 'if_else_block',
@@ -179,6 +180,7 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
         name: 'DROPDOWN',
         options: [
         [ "==", "==" ],
+        [ "!=", "!=" ],
         [ ">=", ">=" ],
         [ "<=", "<=" ],
         [ ">", ">" ],
@@ -206,7 +208,7 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
     ],
     previousStatement: null,
     nextStatement: null,
-    colour: 230,
+    colour: 20,
   },
   {
     type: 'while_block',
@@ -221,6 +223,7 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
         name: 'DROPDOWN',
         options: [
         [ "==", "==" ],
+        [ "!=", "!=" ],
         [ ">=", ">=" ],
         [ "<=", "<=" ],
         [ ">", ">" ],
@@ -241,7 +244,7 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
     ],
     previousStatement: null,
     nextStatement: null,
-    colour: 230,
+    colour: 290,
   },
   {
     type: 'break_block',
@@ -255,7 +258,7 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
     ],
     previousStatement: null,
     nextStatement: null,
-    colour: 180,
+    colour: 290,
   },
   
 ]);
