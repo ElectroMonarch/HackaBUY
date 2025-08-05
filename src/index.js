@@ -78,56 +78,15 @@ ws.addChangeListener((e) => {
   updateCodeDisplay();
 });
 
-// Açılır menü butonunu ve menü içeriğini seç
-const dropdownButton = document.getElementById('examplesDropdown');
-const dropdownMenu = document.getElementById('dropdownContent');
-
-// Butona tıklanınca menüyü açıp kapamak için olay dinleyici ekle
-dropdownButton.addEventListener('click', function(event) {
-    dropdownMenu.classList.toggle('show');
-    event.stopPropagation(); // Butona tıklama olayının yayılmasını engeller
-});
-
-// Sayfanın herhangi bir yerine tıklandığında menüyü kapat
-document.addEventListener('click', function(event) {
-    if (!dropdownMenu.contains(event.target) && !dropdownButton.contains(event.target)) {
-        dropdownMenu.classList.remove('show');
-    }
-});
-
-// JSON dosyasını yükleyecek fonksiyon
-async function loadExample(filePath) {
-    try {
-        const response = await fetch(filePath);
-        if (!response.ok) {
-            throw new Error(`HTTP hatası! Durum: ${response.status}`);
-        }
-        const fileContent = await response.text();
-        const jsonData = JSON.parse(fileContent);
-
-        // Blockly çalışma alanını temizle
-        Blockly.Events.disable();
-        ws.clear(); // workspace'i temizler
-        
-        // JSON verisini çalışma alanına yükle
-        Blockly.serialization.workspaces.load(jsonData, ws, false);
-        Blockly.Events.enable();
-
-        updateCodeDisplay(); // Kod gösterimini güncelle
-        alert("Örnek başarıyla yüklendi!");
-    } catch (error) {
-        console.error('Dosya yükleme veya JSON ayrıştırma hatası:', error);
-        alert("Dosya yüklenirken bir hata oluştu: " + error.message);
-    }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   const downloadButton = document.getElementById('downloadDataButton');
   const fileInput = document.getElementById('fileInput');
   const fileStatus = document.getElementById('fileStatus');
   const clearButton = document.getElementById('clearButton');
   const askAIButton = document.getElementById('AskAIButton');
-  const examplesDropdown = document.getElementById('examplesDropdown');
+  const dropdownButton = document.getElementById('examplesDropdown');
+  const dropdownMenu = document.getElementById('dropdownContent');
+
 
   if (downloadButton) {
     downloadButton.addEventListener('click', () => {
@@ -186,9 +145,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
   }
 
-  if (examplesDropdown) {
-    examplesDropdown.addEventListener('click', (loadExample) => {
-      
-    });
+  dropdownButton.addEventListener('click', function(event) {
+    dropdownMenu.classList.toggle('show');
+    event.stopPropagation(); // Butona tıklama olayının yayılmasını engeller
+  });
+
+  document.addEventListener('click', function(event) {
+    if (!dropdownMenu.contains(event.target) && !dropdownButton.contains(event.target)) {
+        dropdownMenu.classList.remove('show');
+    }
+  });
+
+  function getFileContentSync(filePath) {
+  try {
+    const content = fs.readFileSync(filePath, 'utf8');
+    return content;
+    } catch (err) {
+    console.error('Dosya okuma hatası:', err);
+    return null;
+    }
   }
+  if (dropdownContent) {
+        const items = dropdownContent.querySelectorAll("a.dropdown-item");
+
+        // Her bir a etiketi için bir olay dinleyicisi ekliyoruz
+        items.forEach(item => {
+            item.addEventListener("click", function(event) {
+                event.preventDefault();
+                const path = this.getAttribute("data");
+                
+
+
+
+
+                const jsonData = fetch(path);
+                console.log(path);
+                Blockly.Events.disable();
+                Blockly.serialization.workspaces.load(jsonData, ws, false);
+                Blockly.Events.enable();
+                updateCodeDisplay();
+                
+            });
+        });
+      }
 });
