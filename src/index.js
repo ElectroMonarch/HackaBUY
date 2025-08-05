@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const fileInput = document.getElementById('fileInput');
   const fileStatus = document.getElementById('fileStatus');
   const clearButton = document.getElementById('clearButton');
-  
   if (downloadButton) {
     downloadButton.addEventListener('click', () => {
       const userData = Blockly.serialization.workspaces.save(ws);
