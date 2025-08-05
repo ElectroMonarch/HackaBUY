@@ -7,6 +7,56 @@ import './index.css';
 
 
 Blockly.common.defineBlocks(blocks);
+Blockly.Blocks['variable'].init = function() {
+    this.jsonInit({
+      "type": 'variable',
+      "message0": '%1',
+      "args0": [
+        {
+          "type": 'field_input',
+          "name": 'VAR_NAME',
+        },
+      ],
+      "output": null,
+      "colour": 330,
+    });
+    const myTextInput = this.getField('VAR_NAME');
+    myTextInput.setValidator(function(text) {
+    const regex = /^[a-zA-Z_ığüşçö$][a-zA-Z0-9_ığüşçö$]*$/;
+    if (text.match(regex)) {
+        return text;
+    }
+    return null;
+  });
+};
+Blockly.Blocks['variable_set'].init = function() {
+    this.jsonInit({
+      "type": 'variable_set',
+      "message0": '%1 değişkeninin değerini %2 olarak ayarla',
+      "args0": [
+        {
+          "type": 'field_input',
+          "name": 'VAR_NAME',
+          "text": 'değişken_ismi',
+        },
+        {
+          "type": 'input_value',
+          "name": 'VALUE',
+        },
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 330,
+    });
+    const myTextInput = this.getField('VAR_NAME');
+    myTextInput.setValidator(function(text) {
+    const regex = /^[a-zA-Z_ığüşçö$][a-zA-Z0-9_ığüşçö$]*$/;
+    if (text.match(regex)) {
+        return text;
+    }
+    return null;
+  });
+};
 
 const codeDiv = document.getElementById('generatedCode').firstChild;
 const blocklyDiv = document.getElementById('blocklyDiv');
@@ -33,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const fileInput = document.getElementById('fileInput');
   const fileStatus = document.getElementById('fileStatus');
   const clearButton = document.getElementById('clearButton');
+
   if (downloadButton) {
     downloadButton.addEventListener('click', () => {
       const userData = Blockly.serialization.workspaces.save(ws);

@@ -32,7 +32,12 @@ pythonGenerator.forBlock['logic_boolean'] = function (block) {
 };
 
 pythonGenerator.forBlock['text_output'] = function (block, generator) {
-  const text = String(block.getFieldValue('OUTPUT_TEXT'));
+  let text = String(block.getFieldValue('OUTPUT_TEXT'));
+  // " ve ' kontrolü
+  for (let c of ["\\","\"","\'"]){
+    let newText = text.replaceAll(c, '\\' + c);
+    text = newText;
+  }
   const code = `print("${text}")`;
   return code;
 };
