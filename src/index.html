@@ -157,7 +157,7 @@
             overflow-x: auto;
             flex-grow: 1;
             margin-bottom: 15px;
-            color: #e0e0e0;
+            color: #000000;
         }
 
         #output {
@@ -200,14 +200,7 @@
             #fileStatus { margin-left: 0; margin-top: 5px; text-align: center; }
         }
 
-    #promptInputField {
-      flex: 1;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1em;
-      margin-right: 10px;
-    }
+
     #blocklyDiv {
       flex: 1;
       height: 100%;
@@ -257,6 +250,58 @@
       margin-right: 10px;
     }
 
+            .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown .dropbtn {
+            background-color: #6c757d;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            white-space: nowrap;
+        }
+
+        .dropdown .dropbtn:hover {
+            background-color: #5a6268;
+            transform: translateY(-1px);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #4a4b4b;
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4);
+            z-index: 1;
+            border-radius: 5px;
+            top: 100%;
+            left: 0;
+            margin-top: 5px;
+        }
+
+        .dropdown-menu a {
+            color: #ebe8e8;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #5a6268;
+        }
+
+        /* Açılır menü açıkken gösteren sınıf */
+        .dropdown-menu.show {
+            display: block;
+        }
+
   </style>
 </head>
 <body>
@@ -289,13 +334,15 @@
           <span id="fileStatus">Dosya seçilmedi</span>
         </div>
         <div id="rcontrols">
-          <!-- <button id="" class="dropdown-toggle" data-toggle="dropdown">Bloklar</button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#" onclick="">Asal Sayı Bulma</a>
-            <a class="dropdown-item" href="#" onclick="">Köpek Yaşını Bulma</a>
-            <a class="dropdown-item" href="#" onclick="">Fibonacci Serisi</a>
-            <a class="dropdown-item" href="#" onclick="">Faktöriyel Hesaplama</a>
-          </div> -->
+            <div class="dropdown">
+              <button id="examplesDropdown" class="dropdown-toggle dropbtn" data-toggle="dropdown">Örnekler</button>
+              <div class="dropdown-menu" id="dropdownContent">
+               <a class="dropdown-item" href="#" onclick="loadExample('examples/asalBulma.json'); return false;">Asal Sayı Bulma</a>
+               <a class="dropdown-item" href="#" onclick="loadExample('src/examples/kopekYasi.json'); return false;">Köpek Yaşını Bulma</a>
+               <a class="dropdown-item" href="#" onclick="loadExample('examples/fibonacci.json'); return false;">Fibonacci Serisi</a>
+               <a class="dropdown-item" href="#" onclick="loadExample('examples/faktoriyel.json'); return false;">Faktöriyel Hesaplama</a>
+            </div>
+           </div>
           <button id="AskAIButton">Yapay zekaya sor</button>
         </div>
       </div>

@@ -78,12 +78,56 @@ ws.addChangeListener((e) => {
   updateCodeDisplay();
 });
 
+// Açılır menü butonunu ve menü içeriğini seç
+const dropdownButton = document.getElementById('examplesDropdown');
+const dropdownMenu = document.getElementById('dropdownContent');
+
+// Butona tıklanınca menüyü açıp kapamak için olay dinleyici ekle
+dropdownButton.addEventListener('click', function(event) {
+    dropdownMenu.classList.toggle('show');
+    event.stopPropagation(); // Butona tıklama olayının yayılmasını engeller
+});
+
+// Sayfanın herhangi bir yerine tıklandığında menüyü kapat
+document.addEventListener('click', function(event) {
+    if (!dropdownMenu.contains(event.target) && !dropdownButton.contains(event.target)) {
+        dropdownMenu.classList.remove('show');
+    }
+});
+
+// JSON dosyasını yükleyecek fonksiyon
+async function loadExample(filePath) {
+    try {
+        const response = await fetch(filePath);
+        if (!response.ok) {
+            throw new Error(`HTTP hatası! Durum: ${response.status}`);
+        }
+        const fileContent = await response.text();
+        const jsonData = JSON.parse(fileContent);
+
+        // Blockly çalışma alanını temizle
+        Blockly.Events.disable();
+        ws.clear(); // workspace'i temizler
+        
+        // JSON verisini çalışma alanına yükle
+        Blockly.serialization.workspaces.load(jsonData, ws, false);
+        Blockly.Events.enable();
+
+        updateCodeDisplay(); // Kod gösterimini güncelle
+        alert("Örnek başarıyla yüklendi!");
+    } catch (error) {
+        console.error('Dosya yükleme veya JSON ayrıştırma hatası:', error);
+        alert("Dosya yüklenirken bir hata oluştu: " + error.message);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const downloadButton = document.getElementById('downloadDataButton');
   const fileInput = document.getElementById('fileInput');
   const fileStatus = document.getElementById('fileStatus');
   const clearButton = document.getElementById('clearButton');
   const askAIButton = document.getElementById('AskAIButton');
+  const examplesDropdown = document.getElementById('examplesDropdown');
 
   if (downloadButton) {
     downloadButton.addEventListener('click', () => {
@@ -139,5 +183,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   if (askAIButton) {
+
+  }
+
+  if (examplesDropdown) {
+    examplesDropdown.addEventListener('click', (loadExample) => {
+      
+    });
   }
 });
