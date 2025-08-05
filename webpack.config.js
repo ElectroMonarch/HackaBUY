@@ -12,7 +12,9 @@ const config = {
   },
   // Enable webpack-dev-server to get hot refresh of the app.
   devServer: {
-    static: './build',
+    static: {
+      directory: path.join(__dirname, 'src'), // veya HTML dosyanızın bulunduğu klasör
+    },
   },
   module: {
     rules: [
@@ -34,6 +36,7 @@ const config = {
 };
 
 module.exports = (env, argv) => {
+  
   if (argv.mode === 'development') {
     // Set the output path to the `build` directory
     // so we don't clobber production builds.

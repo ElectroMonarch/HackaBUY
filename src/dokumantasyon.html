@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proje Adı - Dökümantasyon</title>
+    <style>
+        /* Temel stiller */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f9;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #fff;
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #1a73e8; /* Google'ın mavi rengine benzer */
+        }
+
+        /* Navigasyon menüsü */
+        nav {
+            background-color: #eee;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+        }
+
+        /* Ana içerik bölümü */
+        main {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        section {
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            border-bottom: 2px solid #1a73e8;
+            padding-bottom: 5px;
+            color: #1a73e8;
+        }
+
+        h3 {
+            color: #555;
+        }
+
+        /* Kod blokları */
+        pre {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f1f1f1;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        /* Örnekler ve notlar */
+        .note {
+            background-color: #e6f7ff;
+            border-left: 5px solid #1a73e8;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .note p {
+            margin: 0;
+        }
+
+        /* Alt bilgi (footer) */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Yapboz Kodlama Platformu Dökümantasyonu</h1>
+            <p>Yapboz Kodlama Platformu'nun kullanımına yönelik eğitim ve örnek kodlar</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <a href="#baslangic">Yapboz Nedir?</a>
+            <a href="#temeller">İlk Programlarım</a>
+            <a href="#degiskenler">Değişkenler</a>
+            <a href="#karar">Karar Yapıları</a>
+            <a href="#donguler">Döngüler</a>
+            <a href="#api">çöp</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="baslangic">
+            <h2>Yapboz Nedir?</h2>
+            <p>Yapboz, kullanıcıların yapboz benzeri bloklar kullanarak programlama yapabildiği bir platformdur. Kullanıcının oluşturduğu blokların Python dilindeki karşılığı uygulamanın sol tarafında "Oluşturulan Kod" kısmında görünür. Uygulama çalıştırılıp elde edilen çıktılar ise "Uygulama Çıktısı" kısmında görünür. Kullanıcı, uygulamanın yapay zekasına soru sorup cevap alabilir ve yazdığı kodları indirip geri yükleyerek kaldığı yerden devam edebilir.</p>
+        </section>
+
+        <section id="temeller">
+            <h2>İlk Programlarım</h2>
+            <h3>Merhaba Dünya!</h3>
+            <p>"Yazdır" kategorisinden "Yazı yazdır" bloğunu çalışma alanına sürükleyin ve içine "Merhaba Dünya!" yazın ve çalıştırın.</p>
+            <img src="dokumantasyon/1.png">
+            <p>Tebrikler! Yazılım dünyasına "Merhaba" dediniz ve İlk programınızı yazdınız!</p>
+            <h3>Toplama İşlemi</h3>
+            <p>"Sayılar" kategorisinde sayı ve aritmetik işlem blokları bulunmaktadır. Sayı bloğunu ve Sayı yazdırma bloğunu çalışma alanına sürükleyin ve birleştirin. İçine herhangi bir sayı yazın ve çalıştırın.</p>
+            <img src="dokumantasyon/2.png">
+            <p>Benzer şekilde, aritmetik işlem bloğunu kullanarak iki sayının toplamını da ekrana yazdırabilirsiniz.</p>
+            <img src="dokumantasyon/3.png">
+            <p>Aritmatik işlem bloğunun hangi işlemi yapacağını aşağıdaki şekilde seçebilirsiniz.</p>
+            <img src="dokumantasyon/4.png">
+        </section>
+
+        <section id="degiskenler">
+            <h2>Değişkenler</h2>
+            <p>Değişkenler, içinde belirli bir değer tutan yapılardır. Elde ettiğimiz veriler için geçici depolama sağlar ve yazdığımız kodları düzenli tutar. Uygulamanın "Değişkenler" kategorisinde değişkenlerin değerlerini belirlemeyi ve kullanmayı sağlayan bloklar bulunuyor. Aşağıdaki örnekte x isimli bir değişken oluşturulup değeri 5 olarak ayarlanmıştır ve ardından x değişkeninin değeri ekrana yazdırılmıştır.</p>
+            <img src="dokumantasyon/5.png">
+            <h3>Değişken değerini değiştirme</h3>
+            <p>Bir değişkenin değerini değiştirmek için, değişken değeri ayarlama bloğu yeniden kullanılabilir. Aşağıdaki örnekte uygulama çıktısı, 7 olacaktır.</p>
+            <img src="dokumantasyon/6.png">
+            <p>Bir değişkenin değerini arttırmak için ise aritmetik blokları kullanılabilir.</p>
+            <img src="dokumantasyon/7.png">
+            <h3>Örnek: Not hesaplama</h3>
+            <p>Vize sınavının %40'ı ve final sınavının %60'ı alınarak not hesaplayan programı oluşturunuz.</p>
+            <p>Çözüm:</p>
+            <img src="dokumantasyon/9.png">
+        </section>
+
+        <section id="karar">
+            <h2>Karar Yapıları</h2>
+            <p>Belirli bir koşul sağlandığı zaman çalışan bloklar karar yapılarıdır. Uygulamada iki tane karar yapısı bulunuyor. "Eğer" yapısı, sadece koşul sağlandığı zaman içindeki blokları çalıştırır. "Eğer-değilse" bloğu koşul sağlandığında üstteki kodları, sağlanmadığında alttaki blokları çalıştırır.</p>
+            <img src="dokumantasyon/8.png">
+            <h3>Örnek: Dersten geçti/kaldı</h3>
+            <p>Bir dersten geçmek için 50 ve üstü not almak gereksin. Dersten geçme ve kalma durumunu hesaplayan programı oluşturunuz.</p>
+            <p>Çözüm:</p>
+            <img src="dokumantasyon/10.png">
+            <p>Bir önceki örnek ile birleştirirsek:</p>
+            <img src="dokumantasyon/11.png">
+            <h3>İç içe karar yapıları</h3>
+            <p>Birden fazla koşulun sağlanıp sağlanmadığı kontrol edilecekse karar yapıları iç içe yazılabilir.</p>
+            <img src="dokumantasyon/12.png">
+            <h3>Örnek: Köpek yaşı hesaplama</h3>
+            <p>Köpeklerin ilk yılı 15 insan yaşına, ikinci yaşı 9 insan yaşına ve sonraki her yıl 5'er insan yaşına denk gelir. Köpek yaşının insan yaşına çevirilebilmesi için gerekli programı oluşturunuz.</p>
+            <p>Çözüm:</p>
+            <img src="dokumantasyon/13.png">
+        </section>
+
+        <section id="donguler">
+            <h2>Döngüler</h2>
+            <p>Döngüler, belirli blokların tekrarlı şekilde oynatılmasını sağlar. "Döngüler" kategorisinde iki tür döngü ve bir döngü sonlandırma bloğu bulunmaktadır.</p>
+            <img src="dokumantasyon/14.png">
+            <h3>Sayı tekrarlı döngüler</h3>
+            <p>İçindeki blokların belirli sayıda tekrar edilmesini sağlar.</p>
+            <img src="dokumantasyon/15.png">
+            <h3>Koşullu döngüler</h3>
+            <p>İçindeki blokların belirli bir durum gerçekleştiği sürece tekrar edilmesini sağlar. Aşağıdaki program 6'ya kadarki bütün sayıları ekrana yazdır</p>
+            <img src="dokumantasyon/16.png">
+            <h3>Örnek: </h3>
+            <p></p>
+            <p>Çözüm:</p>
+            <img src="dokumantasyon/13.png">
+        </section>
+
+        <section id="api">
+            <h2>çöp</h2>
+            <h3><code>ornekFonksiyon(metin)</code></h3>
+            <p><strong>Parametreler:</strong></p>
+            <ul>
+                <li><code>metin</code> (string): Büyük harfe çevrilecek metin.</li>
+            </ul>
+            <p><strong>Dönüş Değeri:</strong></p>
+            <p>Büyük harfe dönüştürülmüş metni döndürür.</p>
+            <ul>
+                <li>Node.js (versiyon 14 ve üzeri)</li>
+                <li>Git</li>
+            </ul>
+            <div class="note">
+                <p><strong>Not:</strong> Bu dökümantasyon, projenin en güncel sürümüne göre hazırlanmıştır. Eski sürümler için farklılıklar olabilir.</p>
+            </div>
+            <pre><code>// Örnek bir JavaScript kodu
+import { ornekFonksiyon } from 'proje-adi';
+
+const sonuc = ornekFonksiyon("merhaba dünya");
+console.log(sonuc); // "MERHABA DÜNYA"</code></pre>
+            <p><code>ornekFonksiyon</code> adlı bir fonksiyonu kullanmak için:</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Proje Adı. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+</body>
+</html>
