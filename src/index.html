@@ -40,6 +40,7 @@
     }
     #controls {
       display: flex;
+      justify-content: space-between;
       gap: 10px;
       flex-wrap: wrap;
       background-color: #fff;
@@ -47,6 +48,9 @@
       border-radius: 8px;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
       align-items: center;
+    }
+    #rcontrols {
+      margin-right: 0%;
     }
     #fileInputLabel {
       background-color: rgba(13, 160, 245);
@@ -158,6 +162,18 @@
     #blockly-4 {
       color: #000000;
     }
+    #clearButton {
+      background-color: rgb(192, 8, 8);
+    }
+    #clearButton:hover {
+      background-color: rgb(150, 11, 11);
+    }
+    #runButton {
+      background-color: rgb(7, 135, 7);
+    }
+    #runButton:hover {
+      background-color: rgb(13, 91, 6);
+    }
     @media (max-width: 768px) {
       main {
         padding: 10px;
@@ -195,17 +211,21 @@
 
     <main>
       <div id="controls">
-        <label for="fileInput" id="fileInputLabel">Kodu Yükle</label>
-        <input type="file" id="fileInput">
-        <button id="downloadDataButton">Kodu İndir</button>
-        <button id="clearButton">Tahtayı sil</button>
-        <button id="runButton" onclick="evaluatePython()">Çalıştır</button>
-        <span id="fileStatus">Dosya seçilmedi</span>
-        <input type="text" id="promptInputField">
-        <button id="AskAIButton">Yapay zekaya sor</button>
-        <a href="dokumantasyon.html">
-          <button>Dökümantasyon</button>
-        </a>
+        <div id="lcontrols">
+          <label for="fileInput" id="fileInputLabel">Kodu Yükle</label>
+          <input type="file" id="fileInput">
+          <button id="downloadDataButton">Kodu İndir</button>
+          <button id="clearButton">Tahtayı sil</button>
+          <button id="runButton" onclick="evaluatePython()">Çalıştır</button>
+          <span id="fileStatus">Dosya seçilmedi</span>
+        </div>
+        <div id="rcontrols">
+          <input type="text" id="promptInputField">
+          <button id="AskAIButton">Yapay zekaya sor</button>
+          <a href="dokumantasyon.html">
+            <button>Dökümantasyon</button>
+          </a>
+        </div>
       </div>
 
       <div id="workspace-area">
