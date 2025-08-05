@@ -9,7 +9,7 @@
     "start": "webpack serve --open --mode development"
   },
   "author": "Yağız Akın BAŞTOPÇU, Umut Yusuf KAN, Mustafa Berke ÖZCAN",
-  "license": "",
+  "license": "the unlicense",
   "devDependencies": {
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
