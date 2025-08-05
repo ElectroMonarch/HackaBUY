@@ -1,0 +1,316 @@
+{
+  "blocks": {
+    "languageVersion": 0,
+    "blocks": [
+      {
+        "type": "variable_set",
+        "id": "41h;2,4d4_%eU;0i`H%M",
+        "x": -3,
+        "y": 100,
+        "fields": {
+          "VAR_NAME": "kopekYili"
+        },
+        "inputs": {
+          "VALUE": {
+            "block": {
+              "type": "math_number",
+              "id": "5HP4.Yfb?r(+!uaCg`-2",
+              "fields": {
+                "NUM": 18
+              }
+            }
+          }
+        },
+        "next": {
+          "block": {
+            "type": "if_else_block",
+            "id": "J1}rYisBPRC)o5h*/F=a",
+            "fields": {
+              "DROPDOWN": "<="
+            },
+            "inputs": {
+              "NUM1": {
+                "block": {
+                  "type": "variable",
+                  "id": "$;Dy6DaG+#6eLyGZH7cw",
+                  "fields": {
+                    "VAR_NAME": "kopekYili"
+                  }
+                }
+              },
+              "NUM2": {
+                "block": {
+                  "type": "math_number",
+                  "id": "T7@u*PM_!%QRn#b^QnVG",
+                  "fields": {
+                    "NUM": 15
+                  }
+                }
+              },
+              "MEMBERS": {
+                "block": {
+                  "type": "number_output",
+                  "id": "Bf540Fz/i#1UzWW6|kCa",
+                  "inputs": {
+                    "MEMBER_VALUE": {
+                      "block": {
+                        "type": "arithmetic",
+                        "id": "CtgwaMD`RPsgN6E^NoWd",
+                        "fields": {
+                          "DROPDOWN": "/"
+                        },
+                        "inputs": {
+                          "NUM1": {
+                            "block": {
+                              "type": "variable",
+                              "id": "ykz$mc(1=e_7cx7z)(Nx",
+                              "fields": {
+                                "VAR_NAME": "kopekYili"
+                              }
+                            }
+                          },
+                          "NUM2": {
+                            "block": {
+                              "type": "math_number",
+                              "id": ".maY{i//xb-6VR#?BW~/",
+                              "fields": {
+                                "NUM": 15
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "MEMBERS2": {
+                "block": {
+                  "type": "variable_set",
+                  "id": "fikJVD0_hv,2bW}`vC?S",
+                  "fields": {
+                    "VAR_NAME": "kopekYili"
+                  },
+                  "inputs": {
+                    "VALUE": {
+                      "block": {
+                        "type": "arithmetic",
+                        "id": ":5%Jahb9NH2zyy%mf]oG",
+                        "fields": {
+                          "DROPDOWN": "-"
+                        },
+                        "inputs": {
+                          "NUM1": {
+                            "block": {
+                              "type": "variable",
+                              "id": "lD!=gZFUKdE6`AB*I~WA",
+                              "fields": {
+                                "VAR_NAME": "kopekYili"
+                              }
+                            }
+                          },
+                          "NUM2": {
+                            "block": {
+                              "type": "math_number",
+                              "id": "#Nvqa`ft87gkyia7!IkW",
+                              "fields": {
+                                "NUM": 15
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "next": {
+                    "block": {
+                      "type": "if_else_block",
+                      "id": "V8P9Slt2#{7-x-bzoIvy",
+                      "fields": {
+                        "DROPDOWN": "<="
+                      },
+                      "inputs": {
+                        "NUM1": {
+                          "block": {
+                            "type": "variable",
+                            "id": "e]H,TX1Wq`Uf{:Y:W!Z3",
+                            "fields": {
+                              "VAR_NAME": "kopekYili"
+                            }
+                          }
+                        },
+                        "NUM2": {
+                          "block": {
+                            "type": "math_number",
+                            "id": ":I]X-dv=[G2}g1UaFOh%",
+                            "fields": {
+                              "NUM": 9
+                            }
+                          }
+                        },
+                        "MEMBERS": {
+                          "block": {
+                            "type": "number_output",
+                            "id": "Epvz3W0YU#|DEQsh3gC!",
+                            "inputs": {
+                              "MEMBER_VALUE": {
+                                "block": {
+                                  "type": "arithmetic",
+                                  "id": "ZhzDr/op=|Vj/|k3yIp)",
+                                  "fields": {
+                                    "DROPDOWN": "+"
+                                  },
+                                  "inputs": {
+                                    "NUM1": {
+                                      "block": {
+                                        "type": "math_number",
+                                        "id": "h)zyhn1A7qJGFt3oJe7z",
+                                        "fields": {
+                                          "NUM": 1
+                                        }
+                                      }
+                                    },
+                                    "NUM2": {
+                                      "block": {
+                                        "type": "arithmetic",
+                                        "id": "QsWP`it*VA)w~SFN=hz1",
+                                        "fields": {
+                                          "DROPDOWN": "/"
+                                        },
+                                        "inputs": {
+                                          "NUM1": {
+                                            "block": {
+                                              "type": "variable",
+                                              "id": "D+w|qr4E_f1f~;IstI5p",
+                                              "fields": {
+                                                "VAR_NAME": "kopekYili"
+                                              }
+                                            }
+                                          },
+                                          "NUM2": {
+                                            "block": {
+                                              "type": "math_number",
+                                              "id": "ys1E}AEmbQHZm*tMBak(",
+                                              "fields": {
+                                                "NUM": 9
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "MEMBERS2": {
+                          "block": {
+                            "type": "variable_set",
+                            "id": ".1DhkOT2^vtaA/y/sDpV",
+                            "fields": {
+                              "VAR_NAME": "kopekYili"
+                            },
+                            "inputs": {
+                              "VALUE": {
+                                "block": {
+                                  "type": "arithmetic",
+                                  "id": ",G,.a^(C-!kVI6g;`3e;",
+                                  "fields": {
+                                    "DROPDOWN": "-"
+                                  },
+                                  "inputs": {
+                                    "NUM1": {
+                                      "block": {
+                                        "type": "variable",
+                                        "id": "^?$5|?fuV+Fb.W#41q*x",
+                                        "fields": {
+                                          "VAR_NAME": "kopekYili"
+                                        }
+                                      }
+                                    },
+                                    "NUM2": {
+                                      "block": {
+                                        "type": "math_number",
+                                        "id": "UgVg[5q`6_#NjcLkPK,8",
+                                        "fields": {
+                                          "NUM": 9
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "next": {
+                              "block": {
+                                "type": "number_output",
+                                "id": "Ix!rb^2bq0k@G$U=]aUt",
+                                "inputs": {
+                                  "MEMBER_VALUE": {
+                                    "block": {
+                                      "type": "arithmetic",
+                                      "id": "N.P~_hiU`,2^SonbK`C|",
+                                      "fields": {
+                                        "DROPDOWN": "+"
+                                      },
+                                      "inputs": {
+                                        "NUM1": {
+                                          "block": {
+                                            "type": "math_number",
+                                            "id": "Q2C;oMcqnF%Jf1+(g,GX",
+                                            "fields": {
+                                              "NUM": 2
+                                            }
+                                          }
+                                        },
+                                        "NUM2": {
+                                          "block": {
+                                            "type": "arithmetic",
+                                            "id": "P/~E/:13+gP-RRl,}xFN",
+                                            "fields": {
+                                              "DROPDOWN": "/"
+                                            },
+                                            "inputs": {
+                                              "NUM1": {
+                                                "block": {
+                                                  "type": "variable",
+                                                  "id": "%{09^-,3Afea}OIrSa7W",
+                                                  "fields": {
+                                                    "VAR_NAME": "kopekYili"
+                                                  }
+                                                }
+                                              },
+                                              "NUM2": {
+                                                "block": {
+                                                  "type": "math_number",
+                                                  "id": "R.0/_k1oAD0JWKn##Qv_",
+                                                  "fields": {
+                                                    "NUM": 5
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

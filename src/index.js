@@ -83,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const fileInput = document.getElementById('fileInput');
   const fileStatus = document.getElementById('fileStatus');
   const clearButton = document.getElementById('clearButton');
+  const askAIButton = document.getElementById('AskAIButton');
 
   if (downloadButton) {
     downloadButton.addEventListener('click', () => {
@@ -136,5 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
       Blockly.serialization.workspaces.load({}, ws, false);
       updateCodeDisplay();
     });
+  }
+  if (askAIButton) {
   }
 });

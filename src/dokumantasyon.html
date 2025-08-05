@@ -3,211 +3,305 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proje Adı - Dökümantasyon</title>
+    <title>YapBoz - Dökümantasyon</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
-        /* Temel stiller */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f7f9;
-            color: #333;
-        }
-        
-        .container {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #343535;
+    color: #ebe8e8;
+}
 
-        header {
-            background-color: #fff;
-            padding: 20px;
-            border-bottom: 1px solid #ddd;
-            text-align: center;
-        }
+/* Ana Başlık ve Navigasyon Stili */
+.main-header {
+    background-color: hsl(186, 76%, 23%);
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-            color: #1a73e8; /* Google'ın mavi rengine benzer */
-        }
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-        /* Navigasyon menüsü */
-        nav {
-            background-color: #eee;
-            padding: 10px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+.logo-link {
+    text-decoration: none;
+    color: #ebe8e8;
+}
 
-        nav a {
-            text-decoration: none;
-            color: #333;
-            padding: 10px 15px;
-            display: inline-block;
-            transition: background-color 0.3s ease;
-        }
+.logo-link h1 {
+    margin: 0;
+    font-size: 1.8em;
+    color: rgb(13, 160, 245);
+}
 
-        nav a:hover {
-            background-color: #ddd;
-        }
+.main-nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
 
-        /* Ana içerik bölümü */
-        main {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+.main-nav li a {
+    color: #ebe8e8;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-        section {
-            margin-bottom: 30px;
-        }
+.main-nav li a:hover {
+    background-color: rgba(13, 160, 245, 0.8);
+    transform: translateY(-2px);
+}
 
-        h2 {
-            border-bottom: 2px solid #1a73e8;
-            padding-bottom: 5px;
-            color: #1a73e8;
-        }
+.main-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    gap: 30px;
+}
 
-        h3 {
-            color: #555;
-        }
+.sidebar-nav {
+    width: 250px;
+    padding: 20px;
+    background-color: #4a4b4b;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+}
 
-        /* Kod blokları */
-        pre {
-            background-color: #f8f9fa;
-            border: 1px solid #ddd;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
+.sidebar-nav h2 {
+    color: rgb(13, 160, 245);
+    margin-top: 0;
+    border-bottom: 2px solid #575757;
+    padding-bottom: 10px;
+}
 
-        code {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: #f1f1f1;
-            padding: 2px 5px;
-            border-radius: 3px;
-        }
+.sidebar-nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
 
-        /* Örnekler ve notlar */
-        .note {
-            background-color: #e6f7ff;
-            border-left: 5px solid #1a73e8;
-            padding: 15px;
-            margin: 20px 0;
-        }
+.sidebar-nav li a {
+    color: #ebe8e8;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
 
-        .note p {
-            margin: 0;
-        }
+.sidebar-nav li a:hover {
+    background-color: rgba(13, 160, 245, 0.2);
+}
 
-        /* Alt bilgi (footer) */
-        footer {
-            text-align: center;
-            padding: 20px;
-            margin-top: 20px;
-            color: #777;
-        }
-    </style>
+.doc-content {
+    flex-grow: 1;
+    background-color: #4a4b4b;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.doc-content section {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #575757;
+}
+
+.doc-content section:last-child {
+    border-bottom: none;
+}
+
+.doc-content h2, .doc-content h3 {
+    color: rgb(13, 160, 245);
+}
+
+.doc-content h2 {
+    font-size: 2em;
+    border-left: 4px solid rgb(13, 160, 245);
+    padding-left: 10px;
+}
+
+.doc-content h3 {
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+
+.doc-content p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.doc-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 2px solid rgb(13, 160, 245);
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.main-footer {
+    background-color: hsl(186, 76%, 23%);
+    color: #ebe8e8;
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Küçük ekranlar için responsive tasarım */
+@media (max-width: 768px) {
+    .main-header {
+        text-align: left;
+    }
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .main-nav {
+        margin-top: 15px;
+    }
+    .main-container {
+        flex-direction: column;
+    }
+    .sidebar-nav {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+        </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Yapboz Kodlama Platformu Dökümantasyonu</h1>
-            <p>Yapboz Kodlama Platformu'nun kullanımına yönelik eğitim ve örnek kodlar</p>
+
+    <header class="main-header">
+        <div class="header-content">
+            <a href="home.html" class="logo-link"><h1>YapBoz</h1></a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="home.html">Anasayfa</a></li>
+                    <li><a href="index.html">Sandbox</a></li>
+                    <li><a href="dokumantasyon.html">Dokümantasyon</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <nav>
-        <div class="container">
-            <a href="#baslangic">Yapboz Nedir?</a>
-            <a href="#temeller">İlk Programlarım</a>
-            <a href="#degiskenler">Değişkenler</a>
-            <a href="#karar">Karar Yapıları</a>
-            <a href="#donguler">Döngüler</a>
-        </div>
-    </nav>
+    <main class="main-container">
+        <aside class="sidebar-nav">
+            <h2>İçindekiler</h2>
+            <nav>
+                <ul>
+                    <li><a href="#baslangic">Yapboz Nedir?</a></li>
+                    <li><a href="#temeller">İlk Programlarım</a></li>
+                    <li><a href="#degiskenler">Değişkenler</a></li>
+                    <li><a href="#karar">Karar Yapıları</a></li>
+                    <li><a href="#donguler">Döngüler</a></li>
+                </ul>
+            </nav>
+        </aside>
 
-    <main class="container">
-        <section id="baslangic">
-            <h2>Yapboz Nedir?</h2>
-            <p>Yapboz, kullanıcıların yapboz benzeri bloklar kullanarak programlama yapabildiği bir platformdur. Kullanıcının oluşturduğu blokların Python dilindeki karşılığı uygulamanın sol tarafında "Oluşturulan Kod" kısmında görünür. Uygulama çalıştırılıp elde edilen çıktılar ise "Uygulama Çıktısı" kısmında görünür. Kullanıcı, uygulamanın yapay zekasına soru sorup cevap alabilir ve yazdığı kodları indirip geri yükleyerek kaldığı yerden devam edebilir.</p>
-        </section>
+        <article class="doc-content">
+            <section id="baslangic">
+                <img src="images/logo.png" alt="Yapboz Logo" style="width: 800px; height: auto; margin-bottom: 20px;">
+                <h2>Yapboz Nedir?</h2>
+                <p>Yapboz, kullanıcıların yapboz benzeri bloklar kullanarak programlama yapabildiği bir platformdur. Kullanıcının oluşturduğu blokların Python dilindeki karşılığı uygulamanın sol tarafında "Oluşturulan Kod" kısmında görünür. Uygulama çalıştırılıp elde edilen çıktılar ise "Uygulama Çıktısı" kısmında görünür. Kullanıcı, uygulamanın yapay zekasına soru sorup cevap alabilir ve yazdığı kodları indirip geri yükleyerek kaldığı yerden devam edebilir.</p>
+            </section>
 
-        <section id="temeller">
-            <h2>İlk Programlarım</h2>
-            <h3>Merhaba Dünya!</h3>
-            <p>"Yazdır" kategorisinden "Yazı yazdır" bloğunu çalışma alanına sürükleyin ve içine "Merhaba Dünya!" yazın ve çalıştırın.</p>
-            <img src="dokumantasyon/1.png">
-            <p>Tebrikler! Yazılım dünyasına "Merhaba" dediniz ve İlk programınızı yazdınız!</p>
-            <h3>Toplama İşlemi</h3>
-            <p>"Sayılar" kategorisinde sayı ve aritmetik işlem blokları bulunmaktadır. Sayı bloğunu ve Sayı yazdırma bloğunu çalışma alanına sürükleyin ve birleştirin. İçine herhangi bir sayı yazın ve çalıştırın.</p>
-            <img src="dokumantasyon/2.png">
-            <p>Benzer şekilde, aritmetik işlem bloğunu kullanarak iki sayının toplamını da ekrana yazdırabilirsiniz.</p>
-            <img src="dokumantasyon/3.png">
-            <p>Aritmatik işlem bloğunun hangi işlemi yapacağını aşağıdaki şekilde seçebilirsiniz.</p>
-            <img src="dokumantasyon/4.png">
-        </section>
+            <section id="temeller">
+                <h2>İlk Programlarım</h2>
+                <h3>Merhaba Dünya!</h3>
+                <p>"Yazdır" kategorisinden "Yazı yazdır" bloğunu çalışma alanına sürükleyin ve içine "Merhaba Dünya!" yazın ve çalıştırın.</p>
+                <img src="dokumantasyon/1.png" alt="Merhaba Dünya bloğu örneği">
+                <p>Tebrikler! Yazılım dünyasına "Merhaba" dediniz ve İlk programınızı yazdınız!</p>
+                <h3>Toplama İşlemi</h3>
+                <p>"Sayılar" kategorisinde sayı ve aritmetik işlem blokları bulunmaktadır. Sayı bloğunu ve Sayı yazdırma bloğunu çalışma alanına sürükleyin ve birleştirin. İçine herhangi bir sayı yazın ve çalıştırın.</p>
+                <img src="dokumantasyon/2.png" alt="Sayı yazdırma bloğu örneği">
+                <p>Benzer şekilde, aritmetik işlem bloğunu kullanarak iki sayının toplamını da ekrana yazdırabilirsiniz.</p>
+                <img src="dokumantasyon/3.png" alt="Toplama işlemi bloğu örneği">
+                <p>Aritmatik işlem bloğunun hangi işlemi yapacağını aşağıdaki şekilde seçebilirsiniz.</p>
+                <img src="dokumantasyon/4.png" alt="Aritmetik işlem seçenekleri">
+            </section>
 
-        <section id="degiskenler">
-            <h2>Değişkenler</h2>
-            <p>Değişkenler, içinde belirli bir değer tutan yapılardır. Elde ettiğimiz veriler için geçici depolama sağlar ve yazdığımız kodları düzenli tutar. Uygulamanın "Değişkenler" kategorisinde değişkenlerin değerlerini belirlemeyi ve kullanmayı sağlayan bloklar bulunuyor. Aşağıdaki örnekte x isimli bir değişken oluşturulup değeri 5 olarak ayarlanmıştır ve ardından x değişkeninin değeri ekrana yazdırılmıştır.</p>
-            <img src="dokumantasyon/5.png">
-            <h3>Değişken değerini değiştirme</h3>
-            <p>Bir değişkenin değerini değiştirmek için, değişken değeri ayarlama bloğu yeniden kullanılabilir. Aşağıdaki örnekte uygulama çıktısı, 7 olacaktır.</p>
-            <img src="dokumantasyon/6.png">
-            <p>Bir değişkenin değerini arttırmak için ise aritmetik blokları kullanılabilir.</p>
-            <img src="dokumantasyon/7.png">
-            <h3>Örnek: Not hesaplama</h3>
-            <p>Vize sınavının %40'ı ve final sınavının %60'ı alınarak not hesaplayan programı oluşturunuz.</p>
-            <p>Çözüm:</p>
-            <img src="dokumantasyon/9.png">
-        </section>
+            <section id="degiskenler">
+                <h2>Değişkenler</h2>
+                <p>Değişkenler, içinde belirli bir değer tutan yapılardır. Elde ettiğimiz veriler için geçici depolama sağlar ve yazdığımız kodları düzenli tutar. Uygulamanın "Değişkenler" kategorisinde değişkenlerin değerlerini belirlemeyi ve kullanmayı sağlayan bloklar bulunuyor. Aşağıdaki örnekte x isimli bir değişken oluşturulup değeri 5 olarak ayarlanmıştır ve ardından x değişkeninin değeri ekrana yazdırılmıştır.</p>
+                <img src="dokumantasyon/5.png" alt="Değişken tanımlama örneği">
+                <h3>Değişken değerini değiştirme</h3>
+                <p>Bir değişkenin değerini değiştirmek için, değişken değeri ayarlama bloğu yeniden kullanılabilir. Aşağıdaki örnekte uygulama çıktısı, 7 olacaktır.</p>
+                <img src="dokumantasyon/6.png" alt="Değişken değerini değiştirme örneği">
+                <p>Bir değişkenin değerini arttırmak için ise aritmetik blokları kullanılabilir.</p>
+                <img src="dokumantasyon/7.png" alt="Değişken değerini arttırma örneği">
+                <h3>Örnek: Not hesaplama</h3>
+                <p>Vize sınavının %40'ı ve final sınavının %60'ı alınarak not hesaplayan programı oluşturunuz.</p>
+                <p>Çözüm:</p>
+                <img src="dokumantasyon/9.png" alt="Not hesaplama örneği">
+            </section>
 
-        <section id="karar">
-            <h2>Karar Yapıları</h2>
-            <p>Belirli bir koşul sağlandığı zaman çalışan bloklar karar yapılarıdır. Uygulamada iki tane karar yapısı bulunuyor. "Eğer" yapısı, sadece koşul sağlandığı zaman içindeki blokları çalıştırır. "Eğer-değilse" bloğu koşul sağlandığında üstteki kodları, sağlanmadığında alttaki blokları çalıştırır.</p>
-            <img src="dokumantasyon/8.png">
-            <h3>Örnek: Dersten geçti/kaldı</h3>
-            <p>Bir dersten geçmek için 50 ve üstü not almak gereksin. Dersten geçme ve kalma durumunu hesaplayan programı oluşturunuz.</p>
-            <p>Çözüm:</p>
-            <img src="dokumantasyon/10.png">
-            <p>Bir önceki örnek ile birleştirirsek:</p>
-            <img src="dokumantasyon/11.png">
-            <h3>İç içe karar yapıları</h3>
-            <p>Birden fazla koşulun sağlanıp sağlanmadığı kontrol edilecekse karar yapıları iç içe yazılabilir.</p>
-            <img src="dokumantasyon/12.png">
-            <h3>Örnek: Köpek yaşı hesaplama</h3>
-            <p>Köpeklerin ilk yılı 15 insan yaşına, ikinci yaşı 9 insan yaşına ve sonraki her yıl 5'er insan yaşına denk gelir. Köpek yaşının insan yaşına çevirilebilmesi için gerekli programı oluşturunuz.</p>
-            <p>Çözüm:</p>
-            <img src="dokumantasyon/13.png">
-        </section>
+            <section id="karar">
+                <h2>Karar Yapıları</h2>
+                <p>Belirli bir koşul sağlandığı zaman çalışan bloklar karar yapılarıdır. Uygulamada iki tane karar yapısı bulunuyor. "Eğer" yapısı, sadece koşul sağlandığı zaman içindeki blokları çalıştırır. "Eğer-değilse" bloğu koşul sağlandığında üstteki kodları, sağlanmadığında alttaki blokları çalıştırır.</p>
+                <img src="dokumantasyon/8.png" alt="Karar yapıları örneği">
+                <h3>Örnek: Dersten geçti/kaldı</h3>
+                <p>Bir dersten geçmek için 50 ve üstü not almak gereksin. Dersten geçme ve kalma durumunu hesaplayan programı oluşturunuz.</p>
+                <p>Çözüm:</p>
+                <img src="dokumantasyon/10.png" alt="Dersten geçme kalma örneği">
+                <p>Bir önceki örnek ile birleştirirsek:</p>
+                <img src="dokumantasyon/11.png" alt="Not hesaplama ve karar yapısı örneği">
+                <h3>İç içe karar yapıları</h3>
+                <p>Birden fazla koşulun sağlanıp sağlanmadığı kontrol edilecekse karar yapıları iç içe yazılabilir.</p>
+                <img src="dokumantasyon/12.png" alt="İç içe karar yapıları örneği">
+                <h3>Örnek: Köpek yaşı hesaplama</h3>
+                <p>Köpeklerin ilk yılı 15 insan yaşına, ikinci yaşı 9 insan yaşına ve sonraki her yıl 5'er insan yaşına denk gelir. Köpek yaşının insan yaşına çevirilebilmesi için gerekli programı oluşturunuz.</p>
+                <p>Çözüm:</p>
+                <img src="dokumantasyon/13.png" alt="Köpek yaşı hesaplama örneği">
+            </section>
 
-        <section id="donguler">
-            <h2>Döngüler</h2>
-            <p>Döngüler, belirli blokların tekrarlı şekilde oynatılmasını sağlar. "Döngüler" kategorisinde iki tür döngü ve bir döngü sonlandırma bloğu bulunmaktadır.</p>
-            <img src="dokumantasyon/14.png">
-            <h3>Sayı tekrarlı döngüler</h3>
-            <p>İçindeki blokların belirli sayıda tekrar edilmesini sağlar.</p>
-            <img src="dokumantasyon/15.png">
-            <h3>Koşullu döngüler</h3>
-            <p>İçindeki blokların belirli bir durum gerçekleştiği sürece tekrar edilmesini sağlar. Aşağıdaki program 6'ya kadarki bütün sayıları ekrana yazdır</p>
-            <img src="dokumantasyon/16.png">
-            <h3>Döngü sonlandırma</h3>
-            <p>Döngüyü koşula bakmaksızın durdurup döngüden sonraki bloğa geçer. Böylece program istenilen sonucu elde ettikten sonra döngüyü sonuna kadar devam ettirmez.</p>
-            <img src="dokumantasyon/18.png">
-            <h3>Örnek: Asal sayıları sayma</h3>
-            <p>Belirli bir sayıya kadarki asal sayıları ekrana yazdıran programı oluşturunuz</p>
-            <p>Çözüm:</p>
-            <img src="dokumantasyon/17.png">
-        </section>
-    <footer>
-        <div class="container">
+            <section id="donguler">
+                <h2>Döngüler</h2>
+                <p>Döngüler, belirli blokların tekrarlı şekilde oynatılmasını sağlar. "Döngüler" kategorisinde iki tür döngü ve bir döngü sonlandırma bloğu bulunmaktadır.</p>
+                <img src="dokumantasyon/14.png" alt="Döngü blokları örneği">
+                <h3>Sayı tekrarlı döngüler</h3>
+                <p>İçindeki blokların belirli sayıda tekrar edilmesini sağlar.</p>
+                <img src="dokumantasyon/15.png" alt="Sayı tekrarlı döngü örneği">
+                <h3>Koşullu döngüler</h3>
+                <p>İçindeki blokların belirli bir durum gerçekleştiği sürece tekrar edilmesini sağlar. Aşağıdaki program 6'ya kadarki bütün sayıları ekrana yazdır</p>
+                <img src="dokumantasyon/16.png" alt="Koşullu döngü örneği">
+                <h3>Döngü sonlandırma</h3>
+                <p>Döngüyü koşula bakmaksızın durdurup döngüden sonraki bloğa geçer. Böylece program istenilen sonucu elde ettikten sonra döngüyü sonuna kadar devam ettirmez.</p>
+                <img src="dokumantasyon/18.png" alt="Döngü sonlandırma bloğu örneği">
+                <h3>Örnek: Asal sayıları sayma</h3>
+                <p>Belirli bir sayıya kadarki asal sayıları ekrana yazdıran programı oluşturunuz</p>
+                <p>Çözüm:</p>
+                <img src="dokumantasyon/17.png" alt="Asal sayı bulma örneği">
+            </section>
+        </article>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
             <p>HackaBUY takımı tarafından BTK Hackathon 2025 için yapılmıştır.</p>
         </div>
     </footer>
+
 </body>
 </html>

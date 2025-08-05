@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YapBoz - Ana Sayfa</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+<style>
+    body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #343535;
+    color: #ebe8e8;
+}
+
+
+.main-header {
+    background-color: hsl(186, 76%, 23%);
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; 
+    margin: 0 auto;
+}
+
+.main-nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.main-nav li a {
+    color: #ebe8e8;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.main-nav li a:hover {
+    background-color: rgba(13, 160, 245, 0.8);
+    transform: translateY(-2px); 
+}
+
+
+header {
+    background-color: hsl(186, 58%, 31%);
+    color: #ebe8e8;
+    padding: 15px 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: #ebe8e8;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+nav ul li a:hover {
+    background-color: rgba(29, 180, 240, 0.808);
+}
+
+main {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+h1 {
+    color: rgb(13, 160, 245);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h2 {
+    color: #ebe8e8;
+    margin-top: 0;
+}
+
+.content-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    background-color: #4a4b4b;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    gap: 25px;
+}
+
+.image-container {
+    flex: 1;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 2px solid rgb(13, 160, 245);
+}
+
+.logo-link img {
+    height: 120px; /* Logonun yüksekliğini 150 piksel olarak ayarlar */
+    width: auto; /* Genişliği, yüksekliğe orantılı olarak ayarlar */
+    margin-right: 10px;
+}
+
+.text-container {
+    flex: 2;
+}
+
+/* Küçük ekranlar için düzenleme */
+@media (max-width: 768px) {
+    .content-row {
+        flex-direction: column;
+    }
+
+    .image-container {
+        margin-bottom: 20px;
+    }
+}
+</style>
+</head>
+<body>
+
+<header class="main-header">
+    <div class="header-content">
+        <a href="home.html" class="logo-link">
+            <img src="images/logo.png" alt="Yapboz Logo">
+        </a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="home.html">Anasayfa</a></li>
+                <li><a href="index.html">Sandbox</a></li>
+                <li><a href="dokumantasyon.html">Dokümantasyon</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+    <main>
+        
+        <div class="container" style="text-align: center; margin-bottom: 40px;">
+            <p>Hackathon 2025 yarışması kapsamında geliştirilmiştir</p>
+            <p>Bu platform, Python programlama dili kullanarak oyun geliştirme ve kodlama becerilerinizi geliştirmek için tasarlanmıştır.</p>
+            <p>Yapboz, kullanıcı dostu arayüzü ve etkileşimli özellikleri ile kodlama öğrenmeyi eğlenceli hale getirir.</p>
+            <p>Hedefimiz, herkesin kolayca oyun geliştirebilmesi ve kodlama becerilerini artırabilmesidir.</p>
+        </div>
+
+        <div class="content-row">
+            <div class="image-container" style="text-align: center;">
+                <img src="images/Yağız.jpeg" alt="Açıklama 1">
+            </div>
+            <div class="text-container">
+                <h2>Yağız Akın BAŞTOPÇU</h2>
+                <!-- <p>Başkent üniversitesi 2. sınıf öğrencisiyim. Bölümüm Bilgisayar Mühendisliği. </p> -->
+            </div>
+        </div>
+
+        <div class="content-row">
+            <div class="image-container">
+                <img src="images/Umut.jpg" alt="Açıklama 2">
+            </div>
+            <div class="text-container">
+                <h2>Umut Yusuf KAN</h2>
+                <!-- <p>Buraya Resim 2 ile ilgili bir metin yazabilirsiniz. Bu bölümü istediğiniz gibi özelleştirebilirsiniz.</p> -->
+            </div>
+        </div>
+
+        <div class="content-row">
+            <div class="image-container">
+                <img src="images/Berke.png" alt="Açıklama 3">
+            </div>
+            <div class="text-container">
+                <h2>Mustafa Berke ÖZCAN</h2>
+                <!-- <p>Buraya Resim 3 ile ilgili bir metin yazabilirsiniz. Sayfanızın içeriğine uygun metinler eklemeyi unutmayın.</p> -->
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>
