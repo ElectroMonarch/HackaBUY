@@ -10,9 +10,9 @@ YapBoz, 9-12 yaş çocuklara programlama konseptlerini öğretmek amacıyla geli
 
 ## Teknolojiler
 
-* **Frontend:** HTML, CSS, Webpack, Blockly
-* **Backend:** Node.js, Webpack, Blockly
-* **Yapay Zeka** Gemini
+* **Frontend:** HTML, CSS, Node.js, Webpack, Blockly, Pyodide
+* **Backend:** Node.js, Express.js, CORS, Google Cloud
+* **Yapay Zeka** Vertex AI, Gemini
 * **Paket Yöneticisi:** npm
 
 ## Kurulum
