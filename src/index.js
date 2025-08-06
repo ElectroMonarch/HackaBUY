@@ -165,27 +165,87 @@ document.addEventListener('DOMContentLoaded', () => {
     return null;
     }
   }
-  if (dropdownContent) {
-        const items = dropdownContent.querySelectorAll("a.dropdown-item");
+  
+if (dropdownContent) {
+    const items = dropdownContent.querySelectorAll("a.dropdown-item");
 
-        // Her bir a etiketi için bir olay dinleyicisi ekliyoruz
-        items.forEach(item => {
-            item.addEventListener("click", function(event) {
-                event.preventDefault();
-                const path = this.getAttribute("data");
-                
+    items.forEach(item => {
+      item.addEventListener("click", async function(event) {
+        event.preventDefault();
+        const path = this.getAttribute("data");
+
+        try {
+          const response = await fetch(path);
+          if (!response.ok) {
+            throw new Error(`Dosya yüklenemedi: ${response.statusText}`);
+          }
+          const jsonData = await response.json();
+          
+          Blockly.Events.disable();
+          Blockly.serialization.workspaces.load(jsonData, ws, false);
+          Blockly.Events.enable();
+          updateCodeDisplay();
+
+        } catch (error) {
+          console.error('Örnek dosya yükleme hatası:', error);
+          alert(`Örnek yüklenirken bir hata oluştu: ${error.message}`);
+        }
+      });
+    });
+  }
 
 
 
+if (askAIButton) {
+    askAIButton.addEventListener('click', async () => {
+      const promptText = document.getElementById('promptInputField').value;
+      const codeDiv = document.getElementById('generatedCode').firstChild;
 
-                const jsonData = fetch(path);
-                console.log(path);
-                Blockly.Events.disable();
-                Blockly.serialization.workspaces.load(jsonData, ws, false);
-                Blockly.Events.enable();
-                updateCodeDisplay();
-                
-            });
-        });
+      if (!promptText) {
+        codeDiv.innerText = 'Lütfen yapay zekaya sormak istediğiniz şeyi girin.';
+        return;
       }
+      
+      codeDiv.innerText = 'Yapay zeka yanıtı bekleniyor...';
+
+      const projectId = 'dulcet-glyph-468013-g8';
+      const location = 'us-central1';
+      const endpointId = '7092750499178348544';
+      const apiEndpoint = `https://${location}-aiplatform.googleapis.com/v1/projects/${projectId}/locations/${location}/endpoints/${endpointId}:predict`;
+
+      try {
+        const response = await fetch(apiEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            // DİKKAT: Gerçek bir uygulamada, burada bir kimlik doğrulama belirteci (token)
+            // bulunmalıdır. Bu, API'ye erişim izni verir. Bu belirteci güvenli
+            // bir şekilde elde etmeniz gerekir, genellikle bir sunucu tarafından.
+            // Örneğin: 'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
+          },
+          body: JSON.stringify({
+            "instances": [{
+              "prompt": promptText
+            }]
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP hatası! Durum: ${response.status}. Yapay zeka ile iletişim kurulamıyor.`);
+        }
+
+        const result = await response.json();
+        
+        // API yanıt formatını kontrol etmek önemlidir.
+        // Yanıtın tam yapısını görmek için `console.log(result)` kullanabilirsiniz.
+        const generatedPythonCode = result.predictions[0];
+        
+        codeDiv.innerText = generatedPythonCode;
+
+      } catch (error) {
+        console.error('Yapay zeka çağrısında bir hata oluştu:', error);
+        codeDiv.innerText = `Yapay zeka çağrısında bir hata oluştu: ${error.message}. Konsolu kontrol edin.`;
+      }
+    });
+  }
 });
