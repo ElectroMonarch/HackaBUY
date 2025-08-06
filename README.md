@@ -4,7 +4,7 @@ YapBoz, 9-12 yaş çocuklara programlama konseptlerini öğretmek amacıyla geli
 
 ## Özellikler
 
-* **Yapay zeka desteği:** Kullanıcılar, istedikleri program bloklarını yapay zeka ile oluşturabilirler. 
+* **Yapay zeka desteği:** Kullanıcılar, istedikleri program bloklarını yapay zeka ile oluşturabilirler. (Yapay zeka desteğinin çalışması için credentials.json dosyası gereklidir. Bu dosyanın public bir repo içerisinde bulunması güvenlik açıkları oluşturacağından, iletişim halinde paylaşılması uygun görülmüştür.)
 * **Eğitici örnekler ve dökümantasyon:** Blok kodlamayı öğrenmek için dökümantasyonu takip edebilir ve eğitici örneklere göz atabilirsiniz.
 * **Kullanım kolaylığı:** Blokların kullanımını kolaylaştırmak için bloklar kategorilere ayrılmıştır ve çalışma alanı esnek bir şekilde hareket ettirilebilmektedir.
 
