@@ -222,6 +222,8 @@ if (askAIButton) {
                     Bu isteği temsil eden Blockly bloklarını JSON formatında oluştur. Senden sadece JSON formatında bir yanıt bekliyorum.
                 Verceğin yanıtı başka şekilde açıklama yapmadan, sadece JSON formatında ver. Yanıtı bir Markdown kod bloğu içine almayın.
     Yanıt sadece JSON nesnesi olmalı, ek açıklama veya metin içermemeli.
+    aşşağıda kullanabileceğin bloklar var bunlar dışında blok kullanma:
+          ${JSON.stringify(toolbox, null, 2)};
     {
   "blocks": {
     "languageVersion": 0,
