@@ -19,18 +19,19 @@ body {
 
 /* Ana Başlık ve Navigasyon Stili */
 .main-header {
-    background-color: hsl(186, 76%, 23%);
-    padding: 15px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
+            background-color: hsl(186, 76%, 23%);
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
 
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 100%;
+            padding: 0 20px;
+            margin: 0 auto;
+        }
 
 .logo-link {
     text-decoration: none;
@@ -195,7 +196,9 @@ body {
 
     <header class="main-header">
         <div class="header-content">
-            <a href="home.html" class="logo-link"><h1><img src="images/logo.png" alt="Yapboz Logo"></h1></a>
+            <a href="home.html" class="logo-link">
+                <img src="images/logo.png" alt="Yapboz Logo" style="height: 120px; width: auto;">
+            </a>
             <nav class="main-nav">
                 <ul>
                     <li><a href="home.html">Anasayfa</a></li>
