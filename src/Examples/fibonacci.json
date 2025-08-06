@@ -1,0 +1,161 @@
+{
+  "blocks": {
+    "languageVersion": 0,
+    "blocks": [
+      {
+        "type": "variable_set",
+        "id": "initial_a",
+        "x": 82,
+        "y": 50,
+        "fields": {
+          "VAR_NAME": "a"
+        },
+        "inputs": {
+          "VALUE": {
+            "block": {
+              "type": "math_number",
+              "id": "initial_a_value",
+              "fields": {
+                "NUM": 0
+              }
+            }
+          }
+        },
+        "next": {
+          "block": {
+            "type": "variable_set",
+            "id": "initial_b",
+            "fields": {
+              "VAR_NAME": "b"
+            },
+            "inputs": {
+              "VALUE": {
+                "block": {
+                  "type": "math_number",
+                  "id": "initial_b_value",
+                  "fields": {
+                    "NUM": 1
+                  }
+                }
+              }
+            },
+            "next": {
+              "block": {
+                "type": "for_loop",
+                "id": "main_loop",
+                "inputs": {
+                  "LOOP_ITERATION_COUNT": {
+                    "block": {
+                      "type": "math_number",
+                      "id": "loop_count",
+                      "fields": {
+                        "NUM": 5
+                      }
+                    }
+                  },
+                  "MEMBERS": {
+                    "block": {
+                      "type": "number_output",
+                      "id": "print_fib",
+                      "inputs": {
+                        "MEMBER_VALUE": {
+                          "block": {
+                            "type": "variable",
+                            "id": "print_value",
+                            "fields": {
+                              "VAR_NAME": "a"
+                            }
+                          }
+                        }
+                      },
+                      "next": {
+                        "block": {
+                          "type": "variable_set",
+                          "id": "temp_set",
+                          "fields": {
+                            "VAR_NAME": "temp"
+                          },
+                          "inputs": {
+                            "VALUE": {
+                              "block": {
+                                "type": "variable",
+                                "id": "temp_value",
+                                "fields": {
+                                  "VAR_NAME": "a"
+                                }
+                              }
+                            }
+                          },
+                          "next": {
+                            "block": {
+                              "type": "variable_set",
+                              "id": "a_set",
+                              "fields": {
+                                "VAR_NAME": "a"
+                              },
+                              "inputs": {
+                                "VALUE": {
+                                  "block": {
+                                    "type": "variable",
+                                    "id": "a_value",
+                                    "fields": {
+                                      "VAR_NAME": "b"
+                                    }
+                                  }
+                                }
+                              },
+                              "next": {
+                                "block": {
+                                  "type": "variable_set",
+                                  "id": "b_set",
+                                  "fields": {
+                                    "VAR_NAME": "b"
+                                  },
+                                  "inputs": {
+                                    "VALUE": {
+                                      "block": {
+                                        "type": "arithmetic",
+                                        "id": "b_value",
+                                        "fields": {
+                                          "DROPDOWN": "+"
+                                        },
+                                        "inputs": {
+                                          "NUM1": {
+                                            "block": {
+                                              "type": "variable",
+                                              "id": "b_num1",
+                                              "fields": {
+                                                "VAR_NAME": "temp"
+                                              }
+                                            }
+                                          },
+                                          "NUM2": {
+                                            "block": {
+                                              "type": "variable",
+                                              "id": "b_num2",
+                                              "fields": {
+                                                "VAR_NAME": "b"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

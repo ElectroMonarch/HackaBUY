@@ -1,0 +1,161 @@
+{
+  "blocks": {
+    "languageVersion": 0,
+    "blocks": [
+      {
+        "type": "variable_set",
+        "id": "initial_i",
+        "x": 65,
+        "y": 53,
+        "fields": {
+          "VAR_NAME": "i"
+        },
+        "inputs": {
+          "VALUE": {
+            "block": {
+              "type": "math_number",
+              "id": "initial_value_i",
+              "fields": {
+                "NUM": 1
+              }
+            }
+          }
+        },
+        "next": {
+          "block": {
+            "type": "variable_set",
+            "id": "initial_factorial",
+            "fields": {
+              "VAR_NAME": "factorial"
+            },
+            "inputs": {
+              "VALUE": {
+                "block": {
+                  "type": "math_number",
+                  "id": "initial_value_factorial",
+                  "fields": {
+                    "NUM": 1
+                  }
+                }
+              }
+            },
+            "next": {
+              "block": {
+                "type": "for_loop",
+                "id": "for_loop_block",
+                "inputs": {
+                  "LOOP_ITERATION_COUNT": {
+                    "block": {
+                      "type": "math_number",
+                      "id": "loop_end_value",
+                      "fields": {
+                        "NUM": 5
+                      }
+                    }
+                  },
+                  "MEMBERS": {
+                    "block": {
+                      "type": "variable_set",
+                      "id": "update_factorial",
+                      "fields": {
+                        "VAR_NAME": "factorial"
+                      },
+                      "inputs": {
+                        "VALUE": {
+                          "block": {
+                            "type": "arithmetic",
+                            "id": "multiply_factorial",
+                            "fields": {
+                              "DROPDOWN": "*"
+                            },
+                            "inputs": {
+                              "NUM1": {
+                                "block": {
+                                  "type": "variable",
+                                  "id": "current_factorial",
+                                  "fields": {
+                                    "VAR_NAME": "factorial"
+                                  }
+                                }
+                              },
+                              "NUM2": {
+                                "block": {
+                                  "type": "variable",
+                                  "id": "current_i",
+                                  "fields": {
+                                    "VAR_NAME": "i"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "next": {
+                        "block": {
+                          "type": "variable_set",
+                          "id": "increment_i",
+                          "fields": {
+                            "VAR_NAME": "i"
+                          },
+                          "inputs": {
+                            "VALUE": {
+                              "block": {
+                                "type": "arithmetic",
+                                "id": "add_one_to_i",
+                                "fields": {
+                                  "DROPDOWN": "+"
+                                },
+                                "inputs": {
+                                  "NUM1": {
+                                    "block": {
+                                      "type": "variable",
+                                      "id": "current_i_again",
+                                      "fields": {
+                                        "VAR_NAME": "i"
+                                      }
+                                    }
+                                  },
+                                  "NUM2": {
+                                    "block": {
+                                      "type": "math_number",
+                                      "id": "one",
+                                      "fields": {
+                                        "NUM": 1
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "next": {
+                  "block": {
+                    "type": "number_output",
+                    "id": "output_factorial",
+                    "inputs": {
+                      "MEMBER_VALUE": {
+                        "block": {
+                          "type": "variable",
+                          "id": "final_factorial",
+                          "fields": {
+                            "VAR_NAME": "factorial"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -18,7 +18,7 @@
     #app-container {
       display: flex;
       flex-direction: column;
-      height: 200vh;
+      height: 100vh;
       color: rgba(0, 0, 0, 0.2);
       box-shadow: rgba(0, 0, 0, 0.2);
     }
@@ -136,6 +136,7 @@
             background-color: #ffffff;
             overflow-y: auto;
             min-width: 300px;
+            scrollbar-width: thin;
         }
 
         #outputPane h2 {
@@ -158,6 +159,7 @@
             flex-grow: 1;
             margin-bottom: 15px;
             color: #000000;
+            scrollbar-width: thin;
         }
 
         #output {
@@ -168,6 +170,7 @@
             white-space: pre-wrap;
             min-height: 50px;
             color: #e0e0e0;
+            scrollbar-width: thin;
         }
 
 
@@ -236,18 +239,20 @@
     #workspace-area {
       flex-grow: 1;
       display: flex;
-      background-color: #fff;
+      background-color: #ffffff;
       border-radius: 8px;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
       overflow: hidden;
+      
     }
     #promptInputField {
       flex: 1;
       padding: 10px;
-      border: 1px solid #ccc;
+      border: 1px solid #1f1f1f;
       border-radius: 5px;
       font-size: 1em;
       margin-right: 10px;
+      scrollbar-width: thin;
     }
 
             .dropdown {
