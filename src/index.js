@@ -214,6 +214,9 @@ if (askAIButton) {
                 Aşağıdaki kullanıcı isteğini, Blockly bloklarını temsil eden bir JSON nesnesine dönüştür.
     Çıktı sadece ve sadece JSON nesnesi olmalıdır. Başka hiçbir metin, açıklama veya ek bilgi içermemelidir.
     JSON nesnesi, Blockly'nin serileştirme formatına uygun olmalıdır.
+                Aşağıdaki kullanıcı isteğini, Blockly bloklarını temsil eden bir JSON nesnesine dönüştür.
+    Çıktı sadece ve sadece JSON nesnesi olmalıdır. Başka hiçbir metin, açıklama veya ek bilgi içermemelidir.
+    JSON nesnesi, Blockly'nin serileştirme formatına uygun olmalıdır.
                 Kullanıcının isteği: ${promptText}
                 Bu isteği temsil eden Blockly bloklarını JSON formatında oluştur ve çıktıyı sadece JSON olarak ver.
                     Bu isteği temsil eden Blockly bloklarını JSON formatında oluştur. Senden sadece JSON formatında bir yanıt bekliyorum.
